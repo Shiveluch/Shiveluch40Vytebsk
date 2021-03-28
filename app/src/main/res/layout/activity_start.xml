@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start2"
+    android:screenOrientation="landscape">
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@android:color/background_light" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerVertical="false"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="200dp"
+        android:text="Позывной или идентификатор:"
+        android:textColor="@android:color/background_light" />
+
+    <ImageView
+        android:id="@+id/dolg1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+
+
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        app:srcCompat="@drawable/dolg" />
+
+    <ImageView
+        android:id="@+id/freed1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+
+
+        android:layout_alignTop="@+id/dolg1"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/dolg1"
+        app:srcCompat="@drawable/free" />
+
+    <ImageView
+        android:id="@+id/sci1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/editText2"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/freed1"
+        app:srcCompat="@drawable/sci" />
+
+    <ImageView
+        android:id="@+id/mon1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/dolg1"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/monolit" />
+
+    <ImageView
+        android:id="@+id/voln1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+
+        android:layout_alignLeft="@+id/freed1"
+        android:layout_below="@+id/freed1"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/stalker" />
+
+    <ImageView
+        android:id="@+id/band1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+
+        android:layout_alignLeft="@+id/sci1"
+        android:layout_below="@+id/sci1"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/band" />
+
+    <ImageView
+        android:id="@+id/mil1"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_alignLeft="@+id/mon1"
+        android:layout_below="@+id/mon1"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/military" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/graffiti"
+        android:text='ПДА "Шивелуч", версия 4.1 FINAL' />
+
+    <TextView
+        android:id="@+id/TT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/loadinfo"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_above="@+id/sci1"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@+id/editText2"
+        android:visibility="gone"
+        app:srcCompat="@drawable/load" />
+
+    <ImageView
+        android:id="@+id/naem"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_alignLeft="@+id/voln1"
+        android:layout_below="@+id/voln1"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/naem" />
+
+    <ImageView
+        android:id="@+id/cs"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_alignLeft="@+id/band1"
+        android:layout_below="@+id/band1"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/cs" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_alignStart="@+id/loadinfo"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="10dp"
+        android:alpha="0.2"
+        android:visibility="gone"
+         />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="8dp"
+        android:alpha="0.3"
+        android:visibility="visible"
+        app:srcCompat="@drawable/biotope" />
+
+    <ImageView
+        android:id="@+id/voenstal"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/editText2"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@id/sci1"
+        app:srcCompat="@drawable/voenstal" />
+
+    <ImageView
+        android:id="@+id/renegades"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/voenstal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/band1"
+        app:srcCompat="@drawable/renegades" />
+
+    <ImageView
+        android:id="@+id/monster"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/renegades"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/cs"
+        app:srcCompat="@drawable/monster" />
+
+
+</RelativeLayout>

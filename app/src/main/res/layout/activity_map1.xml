@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.pdashiveluch.map">
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/photo_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:id="@+id/close_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="9dp"
+        android:layout_marginEnd="8dp"
+        android:text="Закрыть" />
+
+    <Button
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Топографический вид" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/compass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="21dp"
+            app:srcCompat="@drawable/compass" />
+
+        <Button
+            android:id="@+id/memories"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/compass"
+            android:text="Заметки" />
+
+        <Button
+            android:id="@+id/add_mem"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/memories"
+            android:layout_below="@+id/memories"
+            android:text="Добавить" />
+
+        <ListView
+            android:id="@+id/listmem"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/memories"
+            android:layout_toEndOf="@+id/memories"
+            android:background="@color/colorGreenTrans"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/enter_mem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/add_mem"
+            android:ems="10"
+            android:hint="Введите заметку"
+            android:inputType="textPersonName"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

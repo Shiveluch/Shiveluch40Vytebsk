@@ -1,0 +1,49 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <style name="Progressbar_Horizontal">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_hor1</item>
+
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+
+    </style>
+
+    <style name="Progressrad">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_rad</item>
+
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+
+    </style>
+
+    <style name="Progressano">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progres_ano</item>
+
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+
+    </style>
+
+    <style name="Progresssuit">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/progress_suit</item>
+
+        <item name="android:minHeight">20dip</item>
+        <item name="android:maxHeight">20dip</item>
+
+    </style>
+
+
+</resources>

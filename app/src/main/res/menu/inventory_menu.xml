@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/menuact" >
+        <item
+            android:id="@+id/menuaction"
+            android:icon="@mipmap/ic_launcher"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:title="Использовать"/>
+        <item
+            android:id="@+id/menuinfo"
+            android:title="Информация"/>
+
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/graffiti"
+
+    </group>
+</menu>

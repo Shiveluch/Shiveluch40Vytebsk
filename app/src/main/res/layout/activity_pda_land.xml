@@ -1,0 +1,754 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/sback3">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout3"
+        android:layout_width="150dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/QRscan"
+        android:layout_alignStart="@id/QRscan"
+        android:layout_weight="1"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/suitface"
+            android:layout_width="130dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/stalknew" />
+
+        <TextView
+            android:id="@+id/callsign2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/suitface"
+            android:layout_alignStart="@+id/suitface"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="TextView"
+            android:textColor="@color/colorLightGrey"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/health_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/callsign2"
+            android:layout_alignStart="@+id/callsign2"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="TextView"
+            android:textSize="6pt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/ranknew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/callsign2"
+            android:layout_alignStart="@+id/health_status"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="TextView"
+            android:textColor="@color/colorLightGrey"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/map_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Карта"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/suitname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ranknew"
+            android:layout_alignStart="@+id/ranknew"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="TextView"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/inv_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/map_new"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/map_new"
+            android:fontFamily="@font/graffiti"
+            android:text="Инвентарь"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+
+        <TextView
+            android:id="@+id/res_tex1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView24"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/graffiti"
+            android:text="ХИМЗАЩИТА:"
+            android:textSize="6pt"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/res_tex2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_tex1"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="РАДИАЦИЯ:"
+            android:textSize="6pt"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/res_tex3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_tex2"
+            android:layout_alignStart="@+id/res_tex2"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="ПСИ-ИЗЛУЧЕНИЕ"
+            android:textSize="6pt"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/res_tex4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_tex3"
+            android:layout_alignStart="@+id/res_tex3"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="ГРАВИТАЦИЯ"
+            android:textSize="6pt"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/res_tex5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/res_tex4"
+            android:layout_alignStart="@+id/res_tex4"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="ОГОНЬ:"
+            android:textSize="6pt"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Inv_lay"
+            android:layout_alignStart="@+id/inventor_new"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Блокирование урона:"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="5pt" />
+
+        <TextView
+            android:id="@+id/poison_res_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/res_tex1"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/graffiti"
+            android:text="5%"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/rad_res_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/res_tex3"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/graffiti"
+            android:text="5%"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/psi_res_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/res_tex3"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/graffiti"
+            android:text="5%"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/grav_res_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/res_tex4"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/graffiti"
+            android:text="5%"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/fire_res_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/res_tex5"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/graffiti"
+            android:text="99%"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+
+        <TextView
+            android:id="@+id/electro_res_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/res_tex6"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="@font/graffiti"
+            android:text="99%"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/savebut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/map_new"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="QR-сканер"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/faction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/callsign2"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentEnd="false"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/callsign2"
+            android:fontFamily="@font/graffiti"
+            android:text="TextView"
+            android:textSize="6pt" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/Inv_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/suitname"
+            android:layout_marginTop="15dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/Invtext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/fixedsys"
+                    android:gravity="right"
+                    android:textColor="#FA5347"
+                    android:textSize="5pt" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/res_tex6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/res_tex5"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/graffiti"
+            android:text="ЭЛЕКТРИЧЕСТВО"
+            android:textSize="6pt" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/QRscan"
+        android:layout_toRightOf="@id/relativeLayout3"
+        android:layout_weight="1"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/inventor_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:fontFamily="@font/graffiti"
+            android:text="Инвентарь"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <ListView
+            android:id="@+id/eventslist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/imageView4"
+            android:layout_marginTop="0dp"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            android:visibility="visible"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.122"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+        </ListView>
+
+        <ProgressBar
+            android:id="@+id/pb_heal"
+            style="@style/Progressbar_Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@+id/healtext_new"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="4dp"
+            android:max="100" />
+
+        <ProgressBar
+            android:id="@+id/pb_rad"
+            style="@style/Progressrad"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@+id/radbar_new"
+            android:layout_alignStart="@+id/radbar_new"
+            android:layout_marginTop="4dp"
+            android:max="5000" />
+
+        <ProgressBar
+            android:id="@+id/pb_suit"
+            style="@style/Progresssuit"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_below="@+id/suittext_new"
+            android:layout_alignStart="@+id/suittext_new"
+            android:layout_marginTop="4dp"
+            android:max="100" />
+
+        <TextView
+            android:id="@+id/healtext_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Здоровье:"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/radbar_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pb_heal"
+            android:layout_alignStart="@+id/pb_heal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Накоплено радиации:"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/suittext_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pb_rad"
+            android:layout_alignStart="@+id/pb_rad"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Прочность костюма:"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/anomaly_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radarView"
+            android:layout_alignStart="@+id/radarView"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Место:"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="5pt" />
+
+        <com.example.user.pdashiveluch.RadarView
+            android:id="@+id/radarView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+
+            android:layout_below="@+id/pb_suit"
+            android:layout_alignStart="@+id/pb_suit"
+            android:layout_marginTop="14dp" />
+
+
+        <ImageView
+            android:id="@+id/effectpic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/pb_suit"
+            android:layout_alignStart="@+id/pb_suit"
+            android:visibility="invisible"
+            android:layout_marginTop="0dp" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_below="@+id/radarView"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="60dp"
+            app:srcCompat="@drawable/horline" />
+
+        <TextView
+            android:id="@+id/countdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eventslist"
+            android:layout_alignParentStart="true"
+            android:text="TextView"
+            android:visibility="gone" />
+
+        <Chronometer
+            android:id="@+id/cron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/countdown"
+            android:layout_alignParentStart="true"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/QRscan"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/medikit_new"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/medikit" />
+
+        <ImageView
+            android:id="@+id/antirad_new"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/medikit_new"
+            android:layout_alignStart="@+id/medikit_new"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/antirad" />
+
+
+        <TextView
+            android:id="@+id/medikit_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/medikit_new"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/medikit_new"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/antirad_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medikit_new"
+            android:layout_alignStart="@+id/medikit_amount"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/remont"
+            android:layout_alignStart="@+id/antirad_new"
+            app:srcCompat="@drawable/horline" />
+
+        <TextView
+            android:id="@+id/closeinv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Закрыть" />
+
+        <TextView
+            android:id="@+id/slot1txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView34"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 1: Пусто"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView7"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Артефакты:"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt" />
+
+        <TextView
+            android:id="@+id/slot2txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot1txt"
+            android:layout_alignStart="@+id/slot1txt"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 2: Пусто"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/slot3txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot2txt"
+            android:layout_alignStart="@+id/slot2txt"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 3: Пусто"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/slot4txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot3txt"
+            android:layout_alignStart="@+id/slot3txt"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 4: Пусто"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/slot5txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot4txt"
+            android:layout_alignStart="@+id/slot4txt"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 5: Пусто"
+            android:textSize="6pt" />
+
+        <TextView
+            android:id="@+id/artseffects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot5txt"
+            android:layout_alignStart="@+id/imageView7"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/fixedsys"
+            android:text="Эффекты:"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
+
+        <ImageView
+            android:id="@+id/mil_med"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/medikit_new"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/medikit_amount"
+            app:srcCompat="@drawable/mil_medikit" />
+
+        <TextView
+            android:id="@+id/mil_med_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/mil_med"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/sci_med"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/mil_med"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/antirad_amount"
+            app:srcCompat="@drawable/sci_medikit" />
+
+        <TextView
+            android:id="@+id/sci_med_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mil_med"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/sci_med"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/remont"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/antirad_new"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/remont" />
+
+        <TextView
+            android:id="@+id/rem_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/antirad_new"
+            android:layout_alignStart="@id/antirad_amount"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rules_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignStart="@+id/qrsensor"
+        android:layout_below="@+id/qrsensor"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="15dp"
+        android:visibility="gone">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/rules_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rules"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/d_button"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="10dp"
+        android:alpha="0"
+        />
+
+    <ImageView
+        android:id="@+id/log_menu"
+        android:layout_width="100dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:alpha="0"
+        android:visibility="visible"
+        app:srcCompat="@android:color/background_dark" />
+
+    <ImageView
+        android:id="@+id/QRscan"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="30dp"
+        android:alpha="0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <RelativeLayout
+        android:id="@+id/deadlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/deadpic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:src="@drawable/dead"></ImageView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

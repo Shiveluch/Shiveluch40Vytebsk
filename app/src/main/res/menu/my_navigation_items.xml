@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/action_camera"
+        android:title=""
+        android:checked="true"
+        android:onClick="scanner"
+        android:icon="@drawable/camera" />
+    <item android:id="@+id/action_info"
+        android:title=""
+        android:checked="true"
+        android:onClick="info"
+        android:icon="@drawable/mapmenu" />
+    <item android:id="@+id/action_data"
+        android:title=""
+        android:checked="true"
+        android:onClick="showCurrent"
+
+        android:icon="@drawable/finger" />
+
+
+</menu>

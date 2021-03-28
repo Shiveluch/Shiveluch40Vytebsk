@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Shiveluch40Biotope.iml" filepath="$PROJECT_DIR$/Shiveluch40Biotope.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Shiveluch40Biotope.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Shiveluch40Biotope.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/commons-net-ftp-2.0/Shiveluch40Biotope.commons-net-ftp-2.0.iml" filepath="$PROJECT_DIR$/.idea/modules/commons-net-ftp-2.0/Shiveluch40Biotope.commons-net-ftp-2.0.iml" />
+    </modules>
+  </component>
+</project>
