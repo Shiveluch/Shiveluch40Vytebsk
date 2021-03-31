@@ -683,6 +683,11 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             playerCharcteristics.setBolezn(false);
                             break;
 
+                        case "GiveSuicide":
+                            playerCharcteristics.IncreaseHealth(-1000000);
+                            playerCharcteristics.getSuit().DecreaseStamina(10000);
+                            break;
+
                         case "GiveOtrava":
                             playerCharcteristics.setOtrava(true);
                             break;
@@ -1029,7 +1034,9 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     "88:25:83:F0:B1:EB",
                                     "00:15:83:F0:14:98",
                                     "88:25:83:F0:20:1A",
-                                    "A1:5A:02:03:98:5C"
+                                    "A1:5A:02:03:98:5C",
+                                    "94:49:18:04:04:66"
+
 
                             };
 
@@ -1124,7 +1131,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     "01:03:00:00:00:00",
                                     "01:03:00:00:00:00",
                                     "01:03:00:00:00:00",
-                                    "01:03:00:00:00:00"
+                                    "01:03:00:00:00:00",
+                                    "01:01:00:00:00:00"
 
                             };
 

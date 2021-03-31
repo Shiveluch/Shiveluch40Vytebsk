@@ -46,4 +46,22 @@
     </style>
 
 
+
+        <style name="invtext">
+
+            <item name="android:layout_width">wrap_content</item>
+            <item name="android:layout_height">wrap_content</item>
+            <item name="android:layout_gravity">center_horizontal|center_vertical</item>
+            <item name="android:layout_marginLeft">15dp</item><item name="android:layout_marginRight">10dp</item>
+
+            <item name="android:layout_marginTop">1dp</item>
+            <item name="android:fontFamily">@font/graffiti</item>
+            <item name="android:text">x10</item>
+            <item name="android:textColor">@android:color/holo_orange_light</item>
+            <item name="android:textSize">7pt</item>
+
+        </style>
+
+
+
 </resources>

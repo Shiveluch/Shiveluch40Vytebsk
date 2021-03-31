@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -115,7 +116,7 @@ public class pda extends AppCompatActivity {
             slot1txt, slot2txt, slot3txt, slot4txt, slot5txt, artseffects, savebut, h_status, history_new, c_timer, invtext, sci_med_amount, mil_med_amount, repairs_amount;
 
     ImageView art_but, rules_but, master_but, OK_but, artslot1, bolt_image, log_menu,  effectlogo,
-            artslot2, artslot3, artslot4, antirad1, antirad2, medikit1, medikit2,
+            artslot2, artslot3, artslot4, antirad1, antirad2, medikit1, medikit2,rotate, backpack,mapicon,suicide,
             history, map_but, f_but, b_but, suitface, medikit_new, antirad_new, deadpic, d_but, qrscaner, mil_med, sci_med, repairs_image;
     RelativeLayout layer2, artlayer, bottom_lay;
     ConstraintLayout cons_art;
@@ -712,7 +713,7 @@ public class pda extends AppCompatActivity {
 
 
         String addict = Initializator.GetCurrentDF() + ".  " + "Надет костюм \"" + suitName + "\"";
-        eventsdata.add(addict);
+      //  eventsdata.add(addict);
         adapter.notifyDataSetChanged();
     }
 
@@ -936,6 +937,10 @@ private void NotifyGPS()
         mRadarView = (RadarView) findViewById(R.id.radarView);
         mRadarView.startAnimation();
         deadpic = findViewById(R.id.deadpic);
+        rotate=findViewById(R.id.rotate);
+        backpack=findViewById(R.id.backpack);
+        mapicon=findViewById(R.id.mapicon);
+        suicide=findViewById(R.id.suicide);
 //
        // log_menu=findViewById(R.id.log_menu);
         invtext=findViewById(R.id.Invtext);
@@ -984,6 +989,30 @@ private void NotifyGPS()
         //item_list=findViewById(R.id.items_list);
        // item_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         //СЧЕТЧИК ТИКОВ ХРОНОМЕТРА, ЗАПУСКАЕТСЯ ПРИ УДЕРЖИВАНИИ КНОПКИ СУИЦИДА
+
+        rotate.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                else if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
+        });
+
+        mapicon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), map.class));
+            }
+        });
+
+        suicide.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
 
         bolt_image.setOnClickListener(new OnClickListener() {
             @Override
@@ -1085,7 +1114,7 @@ private void NotifyGPS()
         closeinv = findViewById(R.id.closeinv);
         RL3.setVisibility(View.VISIBLE);
         RL5.setVisibility(View.GONE);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //suit = start.suit;
         suitname = findViewById(R.id.suitname);
         suittext_new = findViewById(R.id.suittext_new);
@@ -1210,6 +1239,14 @@ private void NotifyGPS()
             public void onClick(View v) {
                 RL3.setVisibility(View.GONE);
 
+                RL5.setVisibility(View.VISIBLE);
+            }
+        });
+
+        backpack.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RL3.setVisibility(View.GONE);
                 RL5.setVisibility(View.VISIBLE);
             }
         });
@@ -1503,22 +1540,13 @@ private void NotifyGPS()
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menu1:
-                                Toast.makeText(getApplicationContext(),
-                                        "Карта полигона",
-                                        Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), map.class));
+                     SendActionBroadcast("GiveSuicide");
                                 return true;
                             case R.id.menu2:
                                 Toast.makeText(getApplicationContext(),
-                                        "Инвентарь",
-                                        Toast.LENGTH_SHORT).show();
-                                RL3.setVisibility(View.GONE);
+                                        "Как прекрасен этот мир - посмотри!",
+                                        Toast.LENGTH_LONG).show();
 
-                                RL5.setVisibility(View.VISIBLE);
-                                return true;
-
-                            case R.id.menu3:
-                                SendActionBroadcast("setVibro");
                                 return true;
 
 

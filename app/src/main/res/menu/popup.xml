@@ -7,15 +7,11 @@
             android:icon="@mipmap/ic_launcher"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/graffiti"
-            android:title="Карта"/>
+            android:title="Совершить суицид"/>
         <item
             android:id="@+id/menu2"
-            android:title="Инвентарь"/>
-        <item
-            android:id="@+id/menu3"
-            android:title="Виброотклик вкл/выкл"/>
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/graffiti"
+            android:title="Обратиться к психологу"/>
+
 
     </group>
 
