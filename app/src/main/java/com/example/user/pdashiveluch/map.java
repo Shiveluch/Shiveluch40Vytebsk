@@ -45,7 +45,7 @@ int marker=0;
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_map);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         final PhotoView photoView = (PhotoView) findViewById(R.id.photo_view);
         photoView.setImageResource(R.drawable.map_rad);
         entermem=findViewById(R.id.enter_mem);

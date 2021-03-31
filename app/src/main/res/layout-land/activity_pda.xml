@@ -14,7 +14,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_weight="1"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:id="@+id/l1"
@@ -378,218 +378,238 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/L3"
-        android:visibility="visible">
+        android:visibility="gone">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <ImageView
+            android:id="@+id/medikit_new"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:srcCompat="@drawable/medikit" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
+        <ImageView
+            android:id="@+id/antirad_new"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/medikit_new"
+            android:layout_alignStart="@+id/medikit_new"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/antirad" />
 
-                <TextView
-                    android:id="@+id/bolt_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="x10"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/slot3txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 3: Пусто"
-                    android:textSize="6pt" />
+        <TextView
+            android:id="@+id/medikit_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/medikit_new"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/medikit_new"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt" />
 
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/horline" />
+        <TextView
+            android:id="@+id/antirad_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/medikit_new"
+            android:layout_alignStart="@+id/medikit_amount"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt" />
 
-                <TextView
-                    android:id="@+id/slot1txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="11dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 1: Пусто"
-                    android:textSize="6pt" />
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/remont"
+            android:layout_alignStart="@+id/antirad_new"
+            app:srcCompat="@drawable/horline" />
 
-                <TextView
-                    android:id="@+id/medikit_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="x10"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="7pt" />
+        <TextView
+            android:id="@+id/closeinv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Закрыть" />
 
-                <TextView
-                    android:id="@+id/slot4txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 4: Пусто"
-                    android:textSize="6pt" />
+        <TextView
+            android:id="@+id/slot1txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView34"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="11dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 1: Пусто"
+            android:textSize="6pt" />
 
-                <ImageView
-                    android:id="@+id/mil_med"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    app:srcCompat="@drawable/mil_medikit" />
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView7"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/graffiti"
+            android:text="Артефакты:"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt" />
 
-                <TextView
-                    android:id="@+id/rem_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="x10"
-                    android:textColor="@android:color/holo_orange_light" />
+        <TextView
+            android:id="@+id/slot2txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot1txt"
+            android:layout_alignStart="@+id/slot1txt"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 2: Пусто"
+            android:textSize="6pt" />
 
-                <ImageView
-                    android:id="@+id/medikit_new"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:srcCompat="@drawable/medikit" />
+        <TextView
+            android:id="@+id/slot3txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot2txt"
+            android:layout_alignStart="@+id/slot2txt"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 3: Пусто"
+            android:textSize="6pt" />
 
-                <ImageView
-                    android:id="@+id/remont"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/remont" />
+        <TextView
+            android:id="@+id/slot4txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot3txt"
+            android:layout_alignStart="@+id/slot3txt"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 4: Пусто"
+            android:textSize="6pt" />
 
-                <TextView
-                    android:id="@+id/closeinv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="0dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="Закрыть" />
+        <TextView
+            android:id="@+id/slot5txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot4txt"
+            android:layout_alignStart="@+id/slot4txt"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/graffiti"
+            android:text="СЛОТ 5: Пусто"
+            android:textSize="6pt" />
 
-                <TextView
-                    android:id="@+id/sci_med_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="x10"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+        <TextView
+            android:id="@+id/artseffects"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/slot5txt"
+            android:layout_alignStart="@+id/imageView7"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/fixedsys"
+            android:text="Эффекты:"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="6pt" />
 
-                <TextView
-                    android:id="@+id/slot5txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 5: Пусто"
-                    android:textSize="6pt" />
+        <ImageView
+            android:id="@+id/mil_med"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@id/medikit_new"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/medikit_amount"
+            app:srcCompat="@drawable/mil_medikit" />
 
-                <ImageView
-                    android:id="@+id/bolt"
-                    android:layout_width="50dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    app:srcCompat="@drawable/bolt" />
+        <TextView
+            android:id="@+id/mil_med_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/mil_med"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/antirad_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="x10"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="7pt" />
+        <ImageView
+            android:id="@+id/sci_med"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/mil_med"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/antirad_amount"
+            app:srcCompat="@drawable/sci_medikit" />
 
-                <ImageView
-                    android:id="@+id/sci_med"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/sci_medikit" />
+        <TextView
+            android:id="@+id/sci_med_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mil_med"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/sci_med"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt"
+            android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/textView34"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="Артефакты:"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="7pt" />
+        <ImageView
+            android:id="@+id/remont"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/antirad_new"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/remont" />
 
-                <TextView
-                    android:id="@+id/artseffects"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/fixedsys"
-                    android:text="Эффекты:"
-                    android:textColor="@android:color/holo_orange_dark"
-                    android:textSize="6pt" />
+        <TextView
+            android:id="@+id/rem_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/antirad_new"
+            android:layout_alignStart="@id/antirad_amount"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light" />
 
-                <TextView
-                    android:id="@+id/mil_med_amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="x10"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="7pt"
-                    android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/bolt"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/sci_med"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/rem_amount"
+            app:srcCompat="@drawable/bolt" />
 
-                <ImageView
-                    android:id="@+id/antirad_new"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="10dp"
-                    app:srcCompat="@drawable/antirad" />
-
-                <TextView
-                    android:id="@+id/slot2txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 2: Пусто"
-                    android:textSize="6pt" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"></LinearLayout>
-
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/bolt_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sci_med"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/bolt"
+            android:fontFamily="@font/graffiti"
+            android:text="x10"
+            android:textColor="@android:color/holo_orange_light"
+            android:textSize="7pt"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

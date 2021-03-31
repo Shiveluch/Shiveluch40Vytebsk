@@ -114,7 +114,7 @@ public class start extends AppCompatActivity {
         voln1=findViewById(R.id.voln1);
         band1=findViewById(R.id.band1);
         mil1=findViewById(R.id.mil1);
-        loadinfo=findViewById(R.id.loadinfo);
+      //  loadinfo=findViewById(R.id.loadinfo);
         naem=findViewById(R.id.naem);
         nebo=findViewById(R.id.cs);
         logo=findViewById(R.id.imageView);
@@ -159,19 +159,19 @@ public class start extends AppCompatActivity {
         });
 */ //смена ориентации
 
-        loadinfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sbname=Initializator.GetAddress()+NameSt.getText().toString();
-                passid=NameSt.getText().toString();
-                passcode=NameSt.getText().toString();
-                Toast.makeText(getApplicationContext(), "Загрузка...", Toast.LENGTH_LONG).show();
-                getJSON(sbname);
-                if(CheckFillField())
-                    got(true);
-
-                            }
-        });
+//        loadinfo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sbname=Initializator.GetAddress()+NameSt.getText().toString();
+//                passid=NameSt.getText().toString();
+//                passcode=NameSt.getText().toString();
+//                Toast.makeText(getApplicationContext(), "Загрузка...", Toast.LENGTH_LONG).show();
+//                getJSON(sbname);
+//                if(CheckFillField())
+//                    got(true);
+//
+//                            }
+//        });
 
         nebo.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -369,7 +369,7 @@ public class pda extends AppCompatActivity {
             ParamsRight.addRule(RelativeLayout.BELOW, R.id.QRscan);
             ParamsRight.addRule(RelativeLayout.ABOVE, R.id.log_menu);
             ParamsRight.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            RL4.setLayoutParams(ParamsRight);
+
 
             RelativeLayout.LayoutParams ParamsInv = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -772,11 +772,11 @@ public class pda extends AppCompatActivity {
     private void NotifyNark() {
 
         if (dataPack.nark) {
-            h_status.setText("Наркозависимость");
+        //    h_status.setText("Наркозависимость");
 
         } else {
 
-            h_status.setText("Здоров");
+       //     h_status.setText("Здоров");
 
 
         }
@@ -936,9 +936,8 @@ private void NotifyGPS()
         mRadarView = (RadarView) findViewById(R.id.radarView);
         mRadarView.startAnimation();
         deadpic = findViewById(R.id.deadpic);
-        chronometer = findViewById(R.id.cron);
-        chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * 5);
-        log_menu=findViewById(R.id.log_menu);
+//
+       // log_menu=findViewById(R.id.log_menu);
         invtext=findViewById(R.id.Invtext);
         effectlogo=findViewById(R.id.effectpic);
         effectlogo.setAlpha((float) 0.6);
@@ -970,7 +969,7 @@ private void NotifyGPS()
         slot5txt = findViewById(R.id.slot5txt);
         artseffects = findViewById(R.id.artseffects);
         savebut = findViewById(R.id.savebut);
-        h_status = findViewById(R.id.health_status);
+     //   h_status = findViewById(R.id.health_status);
         mil_med=findViewById(R.id.mil_med);
         repairs_image=findViewById(R.id.remont);
         repairs_amount=findViewById(R.id.rem_amount);
@@ -995,54 +994,8 @@ private void NotifyGPS()
             }
         });
 
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {  //
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                long elapsedMillis = SystemClock.elapsedRealtime()
-                        - chronometer.getBase();
-                if (elapsedMillis > 1) {
-                    chronometer.stop();
-                    //HermesEventBus.getDefault().post("Suicide");
-                    SendActionBroadcast("Suicide");
-                    //service.Suicide();
-
-                }
-            }
-        });
         //ОБРАБОТЧИК ДЛИТЕЛЬНОГО НАЖАТИЯ КНОПКИ СУИЦИДА
-        d_but.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
 
-                chronometer.setBase(SystemClock.elapsedRealtime() + 1000 * 5);//УСТАНОВКА ВРЕМЕНИ ХРОНОМЕТРА
-
-                chronometer.start();//ЗАПУСК ХРОНОМЕТРА
-
-
-                return false;
-            }
-        });
-
-        //ОБРАБОТЧИК КОРОТКОГО НАЖАТИЯ НА КНОПКУ СУИЦИДА
-        d_but.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                chronometer.stop();
-                chronometer.setBase(SystemClock.elapsedRealtime());
-
-
-            }
-        });
-
-log_menu.setOnClickListener(new OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        showPopupMenu(v);
-
-    }
-});
 
 //       log_menu.setOnClickListener(new View.OnClickListener());
 //
@@ -1120,7 +1073,6 @@ log_menu.setOnClickListener(new OnClickListener() {
 
 
         RL3 = (RelativeLayout) findViewById(R.id.relativeLayout3);
-        RL4 = (RelativeLayout) findViewById(R.id.relativeLayout4);
         RL5=findViewById(R.id.relativeLayout5);
 
         RL3.setOnTouchListener(new View.OnTouchListener() {
@@ -1132,9 +1084,8 @@ log_menu.setOnClickListener(new OnClickListener() {
 
         closeinv = findViewById(R.id.closeinv);
         RL3.setVisibility(View.VISIBLE);
-        RL4.setVisibility(View.VISIBLE);
         RL5.setVisibility(View.GONE);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         //suit = start.suit;
         suitname = findViewById(R.id.suitname);
         suittext_new = findViewById(R.id.suittext_new);
@@ -1164,7 +1115,7 @@ log_menu.setOnClickListener(new OnClickListener() {
 
         radbar_new = findViewById(R.id.radbar_new);
 
-        qrscaner = findViewById(R.id.QRscan);
+        qrscaner = findViewById(R.id.QRScan);
         ranknew = findViewById(R.id.ranknew);
 
         callsign_2 = findViewById(R.id.callsign2);
@@ -1195,7 +1146,7 @@ log_menu.setOnClickListener(new OnClickListener() {
         faction.setTypeface(face);
         anomaly.setTypeface(face);
         suitname.setText("");
-        disp_count_portrait();
+        //disp_count_portrait();
 
 
         //ОБРАБОТЧИК НАЖАТИЯ НА ЗНАЧОК АПТЕЧКИ
@@ -1249,13 +1200,7 @@ log_menu.setOnClickListener(new OnClickListener() {
             }
         });
 //ОСТАНОВКА ВИБРАЦИИ ПРИ НАЖАТИИ НА ПАВВУЮ ПАНЕЛЬ
-        RL4.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                vibrator.cancel();
-            }
-        });
+
 
 
         //ОБРАБОТЧИК НАЖАТИЯ НА КНОПКУ ИНВЕНТАРЬ
@@ -1264,7 +1209,7 @@ log_menu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 RL3.setVisibility(View.GONE);
-                RL4.setVisibility(View.GONE);
+
                 RL5.setVisibility(View.VISIBLE);
             }
         });
@@ -1275,7 +1220,7 @@ log_menu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 RL3.setVisibility(View.VISIBLE);
-                RL4.setVisibility(View.VISIBLE);
+
                 RL5.setVisibility(View.GONE);
             }
         });
@@ -1444,8 +1389,13 @@ log_menu.setOnClickListener(new OnClickListener() {
     @Override
     protected void onDestroy() {
         //HermesEventBus.getDefault().destroy();
-        Log.d("жопонька","onDestroy активности pda");
-        unregisterReceiver(ServiceReceiver);
+        Log.d("onDestroy","onDestroy активности pda");
+        try
+        {unregisterReceiver(ServiceReceiver);}
+        catch (Exception e)
+        {
+            Log.d("onDestroy", "не удалось он дестрой");
+        }
         super.onDestroy();
 
         //canceldead();
@@ -1502,7 +1452,7 @@ log_menu.setOnClickListener(new OnClickListener() {
     public void onBackPressed() {
 
         RL3.setVisibility(View.VISIBLE);
-        RL4.setVisibility(View.VISIBLE);
+
         RL5.setVisibility(View.GONE);
         // rules_layout.setVisibility(View.GONE);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -1563,7 +1513,7 @@ log_menu.setOnClickListener(new OnClickListener() {
                                         "Инвентарь",
                                         Toast.LENGTH_SHORT).show();
                                 RL3.setVisibility(View.GONE);
-                                RL4.setVisibility(View.GONE);
+
                                 RL5.setVisibility(View.VISIBLE);
                                 return true;
 
@@ -2030,7 +1980,7 @@ public void BackPack()
                 return false;
             if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_MIN_VELOCITY) {
                 RL3.setVisibility(View.GONE);
-                RL4.setVisibility(View.GONE);
+
                 RL5.setVisibility(View.VISIBLE);
 
             }
