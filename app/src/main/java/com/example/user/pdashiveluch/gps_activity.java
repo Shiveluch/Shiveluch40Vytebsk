@@ -175,10 +175,10 @@ public class gps_activity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(View v) {
                 if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+Log.d("PERMIS","no permissions");
                     return;
                 }
-                Location location = locationManager.getLastKnownLocation(locationManager.getBestProvider(criteria, false));
+                Location location = locationManager.getLastKnownLocation(locationManager.GPS_PROVIDER);
 
                 if (location != null) {
 

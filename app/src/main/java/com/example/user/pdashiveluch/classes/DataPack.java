@@ -18,8 +18,10 @@ public class DataPack implements Serializable {
     public boolean v_otklik;
     public boolean bolezn; //Неизвестная болезнь
     public boolean otrava; //отравление
+    public boolean hunter;
     public String group_name;
     public int group_id;
+    public int bolt;
 
     //private Suit suit; //идентификатор костюма. не может быть пустым. хотя бы куртка простая
     public String suitName;
@@ -34,6 +36,7 @@ public class DataPack implements Serializable {
     //private int z_count = 100;//1. устойчивость атаке контролера
     public boolean zombi;  //2. Состояние зомбированности
     public boolean psi_helm; //флаг наличия/отсутствия пси-шлема
+    public boolean adept;
     public boolean respirator; //флаг наличия/отсутствия респиратора
     public boolean protivogas; //флаг наличия/отсутствия противогаза
     public boolean SZD; //флаг наличия/отсутствия СЗД
@@ -62,6 +65,7 @@ public class DataPack implements Serializable {
     public String BatteryDescription;
     public double latitude,longitude;
     public int distance;
+    public boolean stalker_start;
 
     public int progressanomaly;
     public int FireResist;
@@ -97,7 +101,9 @@ public class DataPack implements Serializable {
         serialized.group_id=val.getGroup().getID();
         serialized.suitName=val.getSuit().getName();
         serialized.suitID=val.getSuit().id;
+        serialized.bolt=val.getBolt();
         serialized.distance=val.getDistance();
+        serialized.hunter=val.getHunter();
         //Debug.Log("GetDataPack 4");
         serialized.suitDescription=val.getSuit().getDescription();
         serialized.suit_stam_big=val.getIntegerSuitStamina();
@@ -117,6 +123,7 @@ public class DataPack implements Serializable {
         serialized.zombi=val.isZombi();
         serialized.immun=val.isImmun();
         serialized.psi_helm=val.isPsi_helm();
+        serialized.adept=val.isAdept();
         serialized.respirator=val.isRespirator();
         serialized.protivogas=val.isProtivogas();
         serialized.SZD=val.isSZD();
@@ -134,6 +141,7 @@ public class DataPack implements Serializable {
         serialized.exp=val.getExp();
         serialized.monvoice=val.isMonvoice();
         serialized.name=val.getName();
+        serialized.stalker_start=val.getStalkerstart();
 
         serialized.latitude=val.getLatitude();
         serialized.longitude=val.getLongitude();

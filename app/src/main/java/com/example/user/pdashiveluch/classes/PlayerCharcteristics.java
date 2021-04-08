@@ -38,12 +38,15 @@ public final class PlayerCharcteristics {
     public boolean bolezn; //флаг наличия/отсутствия болезни
     public boolean otrava; //флаг наличия/отсутствия отравления
     public boolean tropa; //флаг наличия/отсутствия Тропы ЧН
+    public boolean adept;//флаг адептства
+    public boolean hunter;
     public boolean immun;
     public boolean skin;
     public int bolt;
     private float heal_big = 95000;//реальный уровень здоровья
     private int loctime;
     private int distance;
+    private boolean stalker_start;
 
     private float PsiHealth; //писхическое здоровье
     private float rad = 150; //уровень радиации (реальный и для отображения на шкале от 1 до 5000
@@ -572,6 +575,26 @@ public final class PlayerCharcteristics {
 
     }
 
+    public void setAdept(boolean adept) {
+        if(this.adept==adept)
+            return;
+        this.adept = adept;
+        service.NotifyActivity("ADEPT");
+
+    }
+
+    public void setHunter(boolean hunter) {
+        if(this.hunter==hunter)
+            return;
+        this.hunter = hunter;
+        service.NotifyActivity("INVENTORY");
+
+    }
+
+    public boolean isAdept() {
+        return adept;
+    }
+
     public void setRespirator(boolean respirator) {
         if(this.respirator==respirator)
             return;
@@ -718,6 +741,8 @@ public final class PlayerCharcteristics {
         if(value==0)
             return;
         this.setPsiHealth(getPsiHealth()-value);
+
+
 
         Debug.Log("Псиздоровье: "+getPsiHealth());
         service.NotifyActivity("PARAMETERS");
@@ -866,11 +891,10 @@ public final class PlayerCharcteristics {
         this.medikits = medikits;
     }
 
-    public void setPower(int power)
-    {
+    public void setPower(int power) {
         this.power=power;
-
     }
+
 
 
 
@@ -932,6 +956,14 @@ public final class PlayerCharcteristics {
 
     public void setAntirads(int antirads) {
         this.antirads = antirads;
+    }
+
+    public void setStalker_start(boolean stalker_start) { this.stalker_start = stalker_start;
+    }
+
+    public boolean getStalkerstart()
+    {
+        return stalker_start;
     }
 
     public int getExp() {
@@ -1551,6 +1583,7 @@ public final class PlayerCharcteristics {
         if (bolt==0)
             return false;
         bolt--;
+        setBolt(bolt);
         service.NotifyActivity("BOLT");
         service.NotifyToast("Использован Б.О.Л.Т.");
         return true;
@@ -1574,6 +1607,13 @@ public final class PlayerCharcteristics {
     {
         return bolt;
     }
+    public boolean getHunter()
+    {
+        return hunter;
+    }
+
+
+
     //endregion
 
 

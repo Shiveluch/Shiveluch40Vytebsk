@@ -578,7 +578,12 @@ public class Initializator {
                         "88318",// 68   -5 защита от электро слетает
                         "88319",// 69 ремкомплект
                         "88320",//70 неизвестная болезнь
-                        "88321"//71 болты
+                        "88321",//71 болты
+                        "88322",//72 прорыв сталкеров
+                        "88323",//73 адепт
+                        "88324",//74 не адепт
+                        "88325"//75 Hunter
+
                 };
         return allcodes;
     }
@@ -592,10 +597,10 @@ public class Initializator {
 
     public final static PDA_Event[] GetEventsList(){
         PDA_Event[] events=new PDA_Event[]{
-                new PDA_AudioEvent("22.08.2020 13:45:00", "22.08.2020 13:45:01", PDA_AudioManager.AppSounds.VIBR),
-                new PDA_AudioEvent("22.08.2020 13:59:58", "22.08.2020 13:59:59", PDA_AudioManager.AppSounds.BEFV),
-                new PDA_BlowoutEvent("22.08.2020 14:00:00", "22.08.2020 15:00:00", new Places[]{Places.Bandos,Places.Bar,Places.Doctor,Places.Dolg,Places.Freedom,Places.Mercs,Places.Monolit,Places.Sci, Places.Shelter, Places.ClearSky}),
-                new PDA_AudioEvent("22.08.2020 15:00:01", "22.08.2020 15:00:02", PDA_AudioManager.AppSounds.EOVIBR)
+                new PDA_AudioEvent("11.04.2021 14:45:00", "11.04.2021 14:45:01", PDA_AudioManager.AppSounds.VIBR),
+                new PDA_AudioEvent("11.04.2021 14:59:58", "11.04.2021 13:59:59", PDA_AudioManager.AppSounds.BEFV),
+                new PDA_BlowoutEvent("11.04.2021 15:00:00", "11.04.2021 15:30:00", new Places[]{Places.Bandos,Places.Bar,Places.Doctor,Places.Dolg,Places.Freedom,Places.Mercs,Places.Monolit,Places.Sci, Places.Shelter, Places.ClearSky}),
+                new PDA_AudioEvent("11.04.2021 15:30:01", "11.04.2021 15:30:02", PDA_AudioManager.AppSounds.EOVIBR)
         };
 
         //Здесь будет город сад

@@ -35,6 +35,7 @@ import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.user.pdashiveluch.classes.DataPack;
 import com.example.user.pdashiveluch.classes.Debug;
@@ -118,13 +119,14 @@ public class ShiveluchService extends Service implements LocListenerInterface {
     private int AtmoSoundStatus = 0;
     private int AtmoSoundsCounter = 0;
     private int monstroboi_count = 10;
-    public int localtimer = 3, bolt_work=15;
+    public int localtimer = 3, bolt_work=0;
     public int blowoutflag = 0, controlerflag = 0, BlowoutSoundsTimer = 60, ControlerSoundTimer = 30;
 
 
     public int add_health = 0; //счетчик периодического добавления единицы здоровья
     boolean cont_sound = false; //флаг проигрыша звука атаки контролера
     public int mStreamId;
+    public boolean stalker_start=false;
 
     double lat = 0.0, lon = 0.0;
     LatLng position=new LatLng(0,0);
@@ -136,6 +138,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
     String sbname;//имя скрипта, котоыйр должен отработать в JSON
     protected ShiveluchService service;
     final int REQUEST_ACCESS_COARSE_LOCATION = 1243534;
+    float damage;
 
 
     //endregion
@@ -324,6 +327,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
             String action = "";
             action = intent.getAction();
+
             Debug.Log("принят бродкаст " + action);
             switch (action) {
                 case "ShiveluchActivity.RequestService":
@@ -334,6 +338,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                 case "ShiveluchActivity.Action":
                     String ExtraAction = intent.getStringExtra("ExtraAction");
                     Debug.Log("параметр: " + ExtraAction);
+                    int result;
                     switch (ExtraAction) {
                         case "Suicide":
                             Suicide();
@@ -382,6 +387,10 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                         case "GiveBolt":
                             playerCharcteristics.GiveBolt();
                             break;
+                        case "GiveBar":
+                            playerCharcteristics.setStalker_start(true);
+                            Log.d("start",""+playerCharcteristics.getStalkerstart());
+                            break;
 
                         case "UseBolt":
                             playerCharcteristics.UseBolt();
@@ -407,6 +416,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
                         case "setVibroOff":
                             playerCharcteristics.set_vibro(false);
+                            break;
                         case "GiveSuitBand":
                             playerCharcteristics.GiveSuitBand();
                             break;
@@ -582,7 +592,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             break;
 
                         case "IncreaseFireResist":
-                            playerCharcteristics.IncreaseFire_resist(5);
+                            result=playerCharcteristics.GetFireResist();
+                            if (result<61)playerCharcteristics.IncreaseFire_resist(5);
                             break;
 
                         case "DecreaseFireResist":
@@ -591,7 +602,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
 
                         case "IncreasePoisonResist":
-                            playerCharcteristics.IncreasePoison_resist(5);
+                            result=playerCharcteristics.GetPoisonResist();
+                            if (result<61)playerCharcteristics.IncreasePoison_resist(5);
                             break;
 
                         case "DecreasePoisonResist":
@@ -600,7 +612,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
 
                         case "IncreaseElectroResist":
-                            playerCharcteristics.IncreaseElectro_resist(5);
+                            result=playerCharcteristics.GetElectroResist();
+                            if (result<61) playerCharcteristics.IncreaseElectro_resist(5);
                             break;
 
                         case "DecreaseElectroResist":
@@ -608,14 +621,16 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             break;
 
                         case "IncreaseGravResist":
-                            playerCharcteristics.IncreaseGrav_resist(5);
+                            result=playerCharcteristics.GetGravResist();
+                            if (result<61)playerCharcteristics.IncreaseGrav_resist(5);
                             break;
 
                         case "DecreaseGravResist":
                             playerCharcteristics.IncreaseGrav_resist(-5);
                             break;
                         case "IncreasePsiResist":
-                            playerCharcteristics.IncreasePsi_resist(5);
+                            result=playerCharcteristics.GetPsiResist();
+                            if (result<61)playerCharcteristics.IncreasePsi_resist(5);
                             break;
 
                         case "DecreasePsiResist":
@@ -623,7 +638,10 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             break;
 
                         case "IncreaseRadResist":
-                            playerCharcteristics.IncreaseRad_resist(5);
+                            result=playerCharcteristics.GetRadResist();
+                            if (result<61) playerCharcteristics.IncreaseRad_resist(5);
+
+
                             break;
 
                         case "DecreaseRadResist":
@@ -643,6 +661,29 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                         case "GivePsiHelm":
                             playerCharcteristics.setPsi_helm(true);
                             break;
+
+                        case "GiveAdept":
+                        {
+                            playerCharcteristics.setAdept(true);
+                            Log.d("Adept",""+playerCharcteristics.isAdept());
+                            Toast.makeText(getApplicationContext(), "Ты стал адептом Монолита", Toast.LENGTH_LONG).show();
+                            break;
+                        }
+
+                        case "GiveHunter":
+                        {
+                            playerCharcteristics.setHunter(true);
+                            break;
+                        }
+
+                        case "RemoveAdept":
+                        {
+                            playerCharcteristics.setAdept(false);
+                            Log.d("Adept",""+playerCharcteristics.isAdept());
+                            Toast.makeText(getApplicationContext(), "Ты вышел из-под контроля Монолита", Toast.LENGTH_LONG).show();
+
+                        }
+                        break;
                         case "GiveRespirator":
                             playerCharcteristics.setRespirator(true);
                             playerCharcteristics.setProtivogas(false);
@@ -708,6 +749,10 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             playerCharcteristics.setImmun(false);
                             playerCharcteristics.IncreaseHealth(100000);
                             playerCharcteristics.PsiHealing();
+                            playerCharcteristics.setMedikits(0);
+                            playerCharcteristics.setAntirads(0);
+                            playerCharcteristics.setBolt(0);
+
                             break;
 
                         case "GiveSuitBerill":
@@ -766,7 +811,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             Debug.Log("LoadState завершен");
         } else {
             Debug.Log("Обнаружен флаг сброса");
-            InitPlayerCharacteristic(intent.getStringExtra("Name"), intent.getIntExtra("GroupID", 1), 100, 100, 100, 100, false, false, false, false, false, false, false, false, false, false, false, false, false,0);
+            InitPlayerCharacteristic(intent.getStringExtra("Name"), intent.getIntExtra("GroupID", 1), 0, 0, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, false,0);
             Debug.Log("Данные игрока инициализированы");
         }
         service = this;
@@ -1132,7 +1177,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     "01:03:00:00:00:00",
                                     "01:03:00:00:00:00",
                                     "01:03:00:00:00:00",
-                                    "01:01:00:00:00:00"
+                                    "00:00:00:00:00:00"
 
                             };
 
@@ -1384,6 +1429,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                     case 17:
                         place = Places.Doctor;
                         break;
+                    case 18:
+                        place = Places.Medic;
+                        break;
+                    case 19:
+                        place = Places.Tec;
+                        break;
 
 
                     default:
@@ -1503,6 +1554,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
     private void EventsProceed() {
         Debug.Log("переборка эвентов");
+
         for (PDA_Event event :
                 events) {
             if (event instanceof PDA_AudioEvent) {
@@ -1563,9 +1615,10 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                     if (((PDA_BlowoutEvent) event).isVault(place)) {//проверка на убежище
                         Debug.Log("но мы в домике");
                         playerCharcteristics.PsiHealing();
+                        Log.d("Убежище", ""+playerCharcteristics.getPsiHealth());
                         continue;
                     }
-                    Debug.Log("пси урон");
+                    Debug.Log("пси урон "+playerCharcteristics.getPsiHealth());
                     playerCharcteristics.PsiDamage(Initializator.GetBlowoutPsiDamage(), PsiSources.Blowout);  //пси урон если проверка не прошла
                 }
 
@@ -1599,6 +1652,14 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                 playerCharcteristics.setDead(true);
                 return;
             }
+
+            boolean gps_enabled=false;
+            try {
+                gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            } catch(Exception ex) {}
+
+            if (!gps_enabled) playerCharcteristics.setDead(true);
+
             if (!DiscoveryStarted) {
                 Debug.Log("классический старт дискавери");
                 startDiscovery();
@@ -1655,10 +1716,6 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             Long currentTime = new Date().getTime();
             // Log.d("жопонька","Время начала: "+currentTime);
             if ((currentTime - PlaceFoundTimeStamp > 3000)) {
-//            Initializator.GetTimeBeforeResetPlace();
-//long t=currentTime-PlaceFoundTimeStamp;
-//                    Log.d("жопонька","Время начала: "+currentTime+"Время окончания: "+PlaceFoundTimeStamp+"Разница: "+t);
-//                Debug.Log(""+currentTime+" "+PlaceFoundTimeStamp);
                 if (place != Places.None) {
                     Debug.Log("");
                     SetPlaceAndAnomalyPower(0, 0, 7);// сброс плейса
@@ -1669,9 +1726,32 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                 }
             }
 
+            if (place==Places.Bar
+                    || place==Places.Bandos
+                    || place==Places.Bar
+                    || place==Places.Doctor
+                    || place==Places.Dolg
+                    || place==Places.Freedom
+                    || place==Places.Mercs
+                    || place==Places.Monolit
+                    || place==Places.Sci
+                    || place==Places.Shelter
+                    || place==Places.ClearSky) {playerCharcteristics.PsiHealing(); Log.d("Убежище",""+playerCharcteristics.getPsiHealth());}
+
             if (playerCharcteristics.getGroup().isBasePlace(place)) {
+                int group=playerCharcteristics.getGroup().getID();
+                if (group==1 && !playerCharcteristics.getStalkerstart() && place==Places.Bar)
+                {Log.d ("start", "Нельяз лечиться здесь"+", "+group+", "+playerCharcteristics.getStalkerstart()+", "+place);
+
+                    return;
+                }
+                if (playerCharcteristics.getStalkerstart())
+                {Log.d ("start", "Now you can"+", "+group+", "+playerCharcteristics.getStalkerstart()+", "+place);
+
+
+                }
                 playerCharcteristics.IncreaseHealth(Initializator.ValueHealingOnBase());
-                //    playerCharcteristics.IncreaseContCount(1);
+
 
             }
 
@@ -1838,25 +1918,22 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                 int poweran = progressanomaly / 10;
                 playerCharcteristics.setPower(poweran);
 
-                float damage;
+
                 String date = Initializator.GetCurrentDF();
                 switch (place) {
-                    case Village:
-                        if (!playerCharcteristics.getGroup().isBasePlace(Places.Monolit))
-                        {
-                            loc_vibration();
-                            if (!playerCharcteristics.isPsi_helm())
-                            {playerCharcteristics.setDead(true);
-                                String addict = date + ".  " + "Попал под выжигатель мозгов";
-                                NotifyLog(addict);
-                            }
-                        }
-                        break;
+                    case Medic:
+                        playerCharcteristics.IncreaseHealth(Initializator.ValueHealingOnBase());
+                    break;
 
-                    case Monstroboi:
+                    case Tec:
+                        playerCharcteristics.getSuit().IncreaseStamina(5);
+                    break;
+
+                     case Monstroboi:
                         loc_vibration();
                         Log.d("Жопонька","Монстробой сработал");
-                        if (playerCharcteristics.getSuit().getId() == 27)
+                      //  if (playerCharcteristics.getSuit().getId() == 27)
+                        if (!playerCharcteristics.getHunter())
                         {playerCharcteristics.isDead();
                             Log.d("Жопонька","Монстр убит");}
                         break;
@@ -1913,10 +1990,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 //                                    }
                                     if (bolt_work<1)
                                     {damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
-                                        playerCharcteristics.DamageSuit(damage);}}
+                                        playerCharcteristics.DamageSuit(damage);
+                                        anomalyHealDamage();
+                                    }}
                                 else
                                 {if (event_state>5)
-                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Гравиконцентрат. Безопасное расстояние";
+                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Гравиконцентрат";
                                     NotifyLog(addict);
                                     event_state=0;
                                 }
@@ -1958,10 +2037,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 //                                    }
                                     if (bolt_work<1)
                                     { damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
-                                        playerCharcteristics.DamageSuit(damage);}}
+                                        playerCharcteristics.DamageSuit(damage);
+                                        anomalyHealDamage();
+                                    }}
                                 else
                                 {if (event_state>5)
-                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Электра. Безопасное расстояние";
+                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Электра";
                                     NotifyLog(addict);
                                     event_state=0;
                                 }
@@ -2003,10 +2084,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 //                                    }
                                     if (bolt_work<1)
                                     { damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
-                                        playerCharcteristics.DamageSuit(damage);}}
+                                        playerCharcteristics.DamageSuit(damage);
+                                        anomalyHealDamage();
+                                    }}
                                 else
                                 {if (event_state>5)
-                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Жарка. Безопасное расстояние";
+                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Жарка";
                                     NotifyLog(addict);
                                     event_state=0;
                                 }
@@ -2063,10 +2146,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 //                                    }
                                     if (bolt_work<1)
                                     {damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
-                                        playerCharcteristics.DamageSuit(damage);}}
+                                        playerCharcteristics.DamageSuit(damage);
+                                        anomalyHealDamage();
+                                    }}
                                 else
                                 {if (event_state>5)
-                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Кислотный туман. Безопасное расстояние";
+                                {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Кислотный туман";
                                     NotifyLog(addict);
                                     event_state=0;
                                 }
@@ -2127,6 +2212,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                         } else {
                             damage =((Math.abs((poweran * (100 - resist)) / kff))*13)/10;
                             playerCharcteristics.DamageSuit(damage * 4);
+                            anomalyHealDamage();
                         }
                         break;
                     case Psi:
@@ -2172,12 +2258,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 //                                    }
 
                                             damage = 300*anomaly_koefficient*(poweran*(1-resist/100));
-                                            playerCharcteristics.Damage(damage);
+                                            if (!playerCharcteristics.isAdept()) playerCharcteristics.Damage(damage);
 
                                         }
                                         else
                                         {if (event_state>5)
-                                        {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Пси-поле. Безопасное расстояние";
+                                        {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Пси-поле";
                                             NotifyLog(addict);
                                             event_state=0;
                                         }
@@ -2235,7 +2321,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             playerCharcteristics.IncreaseRad(rad_effect);}
                         else
                         {if (event_state>5)
-                        {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Радиация. Безопасное расстояние";
+                        {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Радиация";
                             NotifyLog(addict);
                             event_state=0;
                         }
@@ -2258,6 +2344,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             }
 
         }
+    }
+
+    private void anomalyHealDamage() {
+        float damagean = 35*damage;
+        playerCharcteristics.Damage(damagean);
+
     }
 
     //region Notify
@@ -2547,12 +2639,16 @@ public class ShiveluchService extends Service implements LocListenerInterface {
         ed.putInt("timer_osk", timer_osk);
         ed.putInt("MonPieceCouner", MonPieceCouner);
         ed.putInt("add_health", add_health);
+        ed.putBoolean("stalker_start", playerCharcteristics.getStalkerstart());
+        ed.putBoolean("adept",playerCharcteristics.isAdept());
+
 
         Date currentDate = new Date();
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
         String timeText = timeFormat.format(currentDate);
 
         ed.putString("TimeStamp", timeText);
+        Log.d("saved",""+playerCharcteristics.getStalkerstart());
 
 
         int oldQuantity = servicePreferences.getInt("EventsQuantity", 0);
@@ -2586,7 +2682,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             playerCharcteristics = new PlayerCharcteristics(this);
             playerCharcteristics.setDead(servicePreferences.getBoolean("isDead", true));
             float changeHealth = servicePreferences.getFloat("Health", 0) - playerCharcteristics.getHeal_big();
-            playerCharcteristics.setBolt(servicePreferences.getInt("Bolt",100));
+            playerCharcteristics.setBolt(servicePreferences.getInt("Bolt",0));
             playerCharcteristics.IncreaseHealth(changeHealth);
             playerCharcteristics.set_rankmod(servicePreferences.getInt("rankmod", 0));
             playerCharcteristics.set_group(servicePreferences.getBoolean("Group", true));
@@ -2604,14 +2700,15 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             playerCharcteristics.setTropa(servicePreferences.getBoolean("Tropa", false));
             float rad = servicePreferences.getFloat("Rad", 150) - playerCharcteristics.getRad();
             playerCharcteristics.IncreaseRad(rad);
-            playerCharcteristics.setMedikits(servicePreferences.getInt("Medkits", 100));
-            playerCharcteristics.setMilMedikits(servicePreferences.getInt("MilMedkits", 100));
-            playerCharcteristics.setSciMedikits(servicePreferences.getInt("SciMedkits", 100));
-            playerCharcteristics.setAntirads(servicePreferences.getInt("Antirads", 100));
+            playerCharcteristics.setMedikits(servicePreferences.getInt("Medkits", 0));
+            playerCharcteristics.setMilMedikits(servicePreferences.getInt("MilMedkits", 0));
+            playerCharcteristics.setSciMedikits(servicePreferences.getInt("SciMedkits", 0));
+            playerCharcteristics.setAntirads(servicePreferences.getInt("Antirads", 0));
             playerCharcteristics.setExp(servicePreferences.getInt("Exp", 0));
             playerCharcteristics.setExpcount(servicePreferences.getInt("ExpCount", 0));
             playerCharcteristics.setMonvoice(servicePreferences.getBoolean("MonVoice", false));
             playerCharcteristics.setName(servicePreferences.getString("Name", "Ошибка природы"));
+            playerCharcteristics.setStalker_start(servicePreferences.getBoolean("stalker_start",false));
             if (servicePreferences.getBoolean("Kolobok", false))
                 playerCharcteristics.GiveKolobok();
             if (servicePreferences.getBoolean("Puzir", false))
@@ -2622,11 +2719,13 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                 playerCharcteristics.GiveHeart();
             if (servicePreferences.getBoolean("Battery", false))
                 playerCharcteristics.GiveBattery();
+            playerCharcteristics.setAdept(servicePreferences.getBoolean("adept",false));
 
             psi_helm_work = servicePreferences.getInt("psi_helm_work", 0);
             timer_osk = servicePreferences.getInt("timer_osk", 0);
             MonPieceCouner = servicePreferences.getInt("MonPieceCouner", 0);
             add_health = servicePreferences.getInt("add_health", 0);
+
             //проверка времени с последнего сохранения состояния
             String timeText = servicePreferences.getString("TimeStamp", "00:00:00");
             SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");

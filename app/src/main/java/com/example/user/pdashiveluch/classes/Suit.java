@@ -105,4 +105,11 @@ public class Suit {
         service.NotifyActivity("PARAMETERS");
 
     }
+
+    public void IncreaseStamina(float value){
+        float newStamina=suit_stam_big+value;
+        suit_stam_big=Math.max(0, Math.min(1000, newStamina));
+        service.NotifyActivity("PARAMETERS");
+
+    }
 }

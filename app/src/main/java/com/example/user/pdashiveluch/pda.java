@@ -72,7 +72,7 @@ public class pda extends AppCompatActivity {
     boolean resetPlayer;
     String passcode;
     String passid;
-    String psi_helm_stat, resp_stat, prot_stat, szd_stat, tropa_stat;
+    String psi_helm_stat, resp_stat, prot_stat, szd_stat, tropa_stat, hunter_stat;
 
     String nark_stat, bolezn_stat, otrava_stat, inv_desc="";
     final ArrayList<String> eventsdata = new ArrayList<>();//история
@@ -115,7 +115,7 @@ public class pda extends AppCompatActivity {
             res_tex4, res_tex5, fire_res_new, rad_res_new, poison_res_new, psi_res_new, electro_res_new, grav_res_new, closeinv, antirad_amount, medikit_amount,
             slot1txt, slot2txt, slot3txt, slot4txt, slot5txt, artseffects, savebut, h_status, history_new, c_timer, invtext, sci_med_amount, mil_med_amount, repairs_amount;
 
-    ImageView art_but, rules_but, master_but, OK_but, artslot1, bolt_image, log_menu,  effectlogo,
+    ImageView art_but, rules_but, master_but, OK_but, artslot1, bolt_image, log_menu,  effectlogo, vibra,vibras,
             artslot2, artslot3, artslot4, antirad1, antirad2, medikit1, medikit2,rotate, backpack,mapicon,suicide,
             history, map_but, f_but, b_but, suitface, medikit_new, antirad_new, deadpic, d_but, qrscaner, mil_med, sci_med, repairs_image;
     RelativeLayout layer2, artlayer, bottom_lay;
@@ -708,7 +708,7 @@ public class pda extends AppCompatActivity {
     private void NotifySuitChange() {
         String suitName = dataPack.suitName;
         NotifyInventory();
-        suitName = suitName + psi_helm_stat+ resp_stat+ prot_stat+ szd_stat+ tropa_stat;
+        suitName = suitName + psi_helm_stat+ resp_stat+ prot_stat+ szd_stat+ tropa_stat+hunter_stat;
         suitname.setText(suitName);
 
 
@@ -726,8 +726,11 @@ public class pda extends AppCompatActivity {
         if (dataPack.protivogas) prot_stat="+Противогаз"; else prot_stat="";
         if (dataPack.SZD) szd_stat="+Система замкнутого дыхания"; else szd_stat="";
         if (dataPack.tropa) tropa_stat="+Тропа Чистого неба"; else tropa_stat="";
+        if (dataPack.hunter) hunter_stat="\nОХОТНИК"; else hunter_stat="";
+    }
 
-
+    private void NotifyAdept()
+    {
 
     }
 
@@ -884,6 +887,15 @@ private void NotifyGPS()
             case "INVENTORY":
                     NotifyInventory();
                     break;
+            case "BOLT":
+                NotifyBolt();
+                break;
+            case "ISBOLT":
+                    NotifyIsbolt();
+                    break;
+            case "ADEPT":
+                NotifyAdept();
+                break;
             case "POWER":
                 NotifyPower();
                 break;
@@ -902,6 +914,7 @@ private void NotifyGPS()
                 NotifyPlaceChange();
                 NotifyArtifactChange();
                 NotifyMedkit();
+                NotifyBolt();
                 NotifyAntirad();
                 NotifyMilMedkit();
                 NotifyRepairs();
@@ -920,6 +933,22 @@ private void NotifyGPS()
         }
 
     }
+
+    private void NotifyBolt() {
+        bolt_amount.setText("x"+dataPack.bolt);
+        Log.d("Bolt",""+dataPack.bolt);
+    }
+    private void NotifyIsbolt()
+    {
+        anomaly.setText("ПРИМЕНЕН Б.О.Л.Т.");
+    }
+
+    private void NotifyNobolt()
+    {
+        anomaly.setText("Поиск...");
+
+    }
+
     //endregion
 
 
@@ -941,6 +970,8 @@ private void NotifyGPS()
         backpack=findViewById(R.id.backpack);
         mapicon=findViewById(R.id.mapicon);
         suicide=findViewById(R.id.suicide);
+        vibra=findViewById(R.id.vibra);
+      //  vibras=findViewById(R.id.vibras);
 //
        // log_menu=findViewById(R.id.log_menu);
         invtext=findViewById(R.id.Invtext);
@@ -990,6 +1021,20 @@ private void NotifyGPS()
        // item_list.setChoiceMode(ExpandableListView.CHOICE_MODE_MULTIPLE);
         //СЧЕТЧИК ТИКОВ ХРОНОМЕТРА, ЗАПУСКАЕТСЯ ПРИ УДЕРЖИВАНИИ КНОПКИ СУИЦИДА
 
+        vibra.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendActionBroadcast("setVibro");
+
+            }
+        });
+//        vibras.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                SendActionBroadcast("setVibro");
+//            }
+//        });
+
         rotate.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1018,7 +1063,7 @@ private void NotifyGPS()
             @Override
             public void onClick(View v) {
                 inv_index=1;
-                Log.d("Болт", "Нажат болт "+inv_index);
+                Log.d("bolt", "Нажат болт "+inv_index);
                 InvMenu(v);
             }
         });
@@ -1216,7 +1261,7 @@ private void NotifyGPS()
             @Override
             public void onClick(View v) {
                 inv_index=6;
-                Log.d("Болт", "Нажат болт "+inv_index);
+
                 InvMenu(v);            }
         });
 
@@ -1967,6 +2012,25 @@ public void BackPack()
 
         }
 
+        if (codename.equals(allcodes[72])) {
+            SendActionBroadcast("GiveBar");
+
+        }
+        if (codename.equals(allcodes[73])) {
+            SendActionBroadcast("GiveAdept");
+
+        }
+
+        if (codename.equals(allcodes[74])) {
+            SendActionBroadcast("RemoveAdept");
+
+        }
+
+        if (codename.equals(allcodes[75])) {
+            SendActionBroadcast("GiveHunter");
+
+        }
+
 
 
 
@@ -2018,7 +2082,7 @@ public void BackPack()
 
     private void InvMenu(View v)
     {
-        Log.d("Болт", "Нажат болт "+inv_index);
+        Log.d("Болт", "Нажат предмет инвентаря "+inv_index);
         PopupMenu popupMenu = new PopupMenu(this, v);
         popupMenu.inflate(R.menu.inventory_menu);
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

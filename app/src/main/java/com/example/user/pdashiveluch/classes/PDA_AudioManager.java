@@ -178,7 +178,7 @@ public class PDA_AudioManager implements SoundPool.OnLoadCompleteListener{
         rnd = randoms.nextInt(9);
         if (rnd > 9)
             rnd = 9;
-        Play(mAtmoVoice[rnd]);
+        //Play(mAtmoVoice[rnd]);
 
     }
 
@@ -276,7 +276,7 @@ public class PDA_AudioManager implements SoundPool.OnLoadCompleteListener{
                 MonolitVoice();
                 break;
             case ATMO:
-                AtmoSounds();
+                //AtmoSounds();
                 break;
             case BLOWOUT:
                 BlowoutSounds();

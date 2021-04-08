@@ -688,6 +688,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
+            android:tint="#00FF00"
             app:srcCompat="@drawable/camera" />
 
         <ImageView
@@ -695,6 +696,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:tint="#00FF00"
             app:srcCompat="@drawable/backpack" />
 
         <ImageView
@@ -702,6 +704,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:tint="#00FF00"
             app:srcCompat="@drawable/mapicon" />
 
         <ImageView
@@ -709,7 +712,17 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:tint="#00FF00"
             app:srcCompat="@drawable/suicide" />
+
+        <ImageView
+            android:id="@+id/vibra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:tint="#00FF00"
+            app:srcCompat="@drawable/vibra" />
 
         <ImageView
             android:id="@+id/rotate"
@@ -717,6 +730,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:baselineAligned="false"
+            android:tint="#00FF00"
             app:srcCompat="@drawable/rotate" />
 
     </LinearLayout>

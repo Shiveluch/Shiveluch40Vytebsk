@@ -51,7 +51,8 @@ public class PDA_BlowoutEvent extends PDA_Event{
         for (Places vault:
              Vaults) {
             if(value==vault)
-                return true;
+            {
+                return true;}
         }
         return false;
     }
