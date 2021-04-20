@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class DataPack implements Serializable {
     public boolean dead;
     public int heal_big;//реальный уровень здоровья
-
+public boolean gipnos;
     public int rankmod;
     public String RankText;
     public boolean group; //2. принадлежность к группировке,
@@ -36,7 +36,7 @@ public class DataPack implements Serializable {
     //private int z_count = 100;//1. устойчивость атаке контролера
     public boolean zombi;  //2. Состояние зомбированности
     public boolean psi_helm; //флаг наличия/отсутствия пси-шлема
-    public boolean adept;
+    public boolean adept, osob;
     public boolean respirator; //флаг наличия/отсутствия респиратора
     public boolean protivogas; //флаг наличия/отсутствия противогаза
     public boolean SZD; //флаг наличия/отсутствия СЗД
@@ -44,7 +44,7 @@ public class DataPack implements Serializable {
     public boolean immun; //наличие иммунитета
 
     public int PsiHealth; //писхическое здоровье
-    public int rad = 150; //уровень радиации (реальный и для отображения на шкале от 1 до 5000
+    public int rad = 1500; //уровень радиации (реальный и для отображения на шкале от 1 до 5000
 
     public int medikits, mil_medikits, sci_medikits, antirads; //аптечки и антирадин
     public int power;
@@ -104,6 +104,7 @@ public class DataPack implements Serializable {
         serialized.bolt=val.getBolt();
         serialized.distance=val.getDistance();
         serialized.hunter=val.getHunter();
+        serialized.gipnos=val.getGipnos();
         //Debug.Log("GetDataPack 4");
         serialized.suitDescription=val.getSuit().getDescription();
         serialized.suit_stam_big=val.getIntegerSuitStamina();
@@ -130,6 +131,7 @@ public class DataPack implements Serializable {
         serialized.tropa=val.isTropa();
         serialized.power=val.getPower();
         serialized.loctime=val.getLoctime();
+        serialized.osob=val.isOsob();
 
         serialized.PsiHealth=val.getIntegerPsiHealth();
         serialized.rad=val.getIntegerRad();

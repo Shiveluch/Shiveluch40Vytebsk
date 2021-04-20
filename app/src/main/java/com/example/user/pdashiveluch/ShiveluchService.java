@@ -72,6 +72,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -92,6 +93,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
     //protected pda activity;
     public PDA_AudioManager myAudioManager;
     LocationManager locationManager;
+    int zombiCount=0;
     protected HashMap<Number, Group> groups;
     protected PDA_Event[] events;
     //region ***** РАБОТА С АНОМАЛИЯМИ И ЛОКАЦИЯМИ
@@ -127,6 +129,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
     boolean cont_sound = false; //флаг проигрыша звука атаки контролера
     public int mStreamId;
     public boolean stalker_start=false;
+    public boolean gipnos;
 
     double lat = 0.0, lon = 0.0;
     LatLng position=new LatLng(0,0);
@@ -676,6 +679,47 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                             break;
                         }
 
+                        case "RemoveGipnos": {
+                            playerCharcteristics.setGipnos(false);
+                            NotifyActivity("GIPNOS");
+                            break;
+                        }
+
+                        case "Osob": {
+                            playerCharcteristics.setOsob(true);
+                            break;
+                        }
+
+                        case "DrinkVodka":
+                        {
+                            playerCharcteristics.IncreaseHealth(-20000);
+                            playerCharcteristics.setRad(playerCharcteristics.getRad()-1000);
+                            Random randoms = new Random();
+                            int rnd;
+                            rnd = randoms.nextInt(5) + 1;
+                            String aforizm="";
+                            switch (rnd)
+                            {
+                                case 1:
+                                aforizm="Водка помогает уйти от проблем, к которым приводит пьянство";
+                                break;
+                                case 2:
+                                    aforizm="В стакане водки оптимист видит 40% спирта, а пессимист — 60% воды.";
+                                    break;
+                                case 3:
+                                    aforizm="Если пить водку, то ты никогда не умрешь от радиации, а умрешь от цирроза печени";
+                                    break;
+                                case 4:
+                                    aforizm="И зачем антирад, если есть водка?";
+                                    break;
+                                case 5:
+                                    aforizm="А что если для питья водки надо снимать противогаз? Да не, бред какой то";
+                                    break;
+                            }
+                            Toast.makeText(getApplicationContext(),aforizm,Toast.LENGTH_LONG).show();
+
+                        }
+                        break;
                         case "RemoveAdept":
                         {
                             playerCharcteristics.setAdept(false);
@@ -1435,6 +1479,9 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                     case 19:
                         place = Places.Tec;
                         break;
+                    case 20:
+                        place = Places.Gipnos;
+                        break;
 
 
                     default:
@@ -1485,19 +1532,19 @@ public class ShiveluchService extends Service implements LocListenerInterface {
     private void RadiationProceed() {
         float rad = playerCharcteristics.getRad();
         int koef = 0;
-        if (rad >= 5000) {
+        if (rad >= 50000) {
             koef = 0;
-        } else if (rad >= 4000) {
+        } else if (rad >= 40000) {
             koef = 10000;
-        } else if (rad >= 3000) {
+        } else if (rad >= 30000) {
             koef = 4000;
-        } else if (rad >= 2000) {
+        } else if (rad >= 20000) {
             koef = 1000;
         }
 
         playerCharcteristics.Damage(koef);
 
-        if (rad >= 5000) {
+        if (rad >= 50000) {
             playerCharcteristics.Damage(playerCharcteristics.getHeal_big());
 
             String addict = Initializator.GetCurrentDF() + ".  " + "Смерть от радиации";
@@ -1505,7 +1552,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
         }
 
         if (playerCharcteristics.getHeal_big() <= 0) {
-            String addict = Initializator.GetCurrentDF() + ".  " + "Смерть от истощения здоровья в результате радиационного воздействия";
+            String addict = Initializator.GetCurrentDF() + ".  " + "Смерть от истощения здоровья";
             NotifyLog(addict);
         }
     }
@@ -1638,6 +1685,13 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             //ТАЙМЕРЫ. ПРИБАВЛЕНИЕ РАЗ В СЕКУНДУ
             //ЗАПУСК ОБНАРУЖЕНИЯ БЛЮТУСОВ
             //Debug.Log("сработал ежесекундный таймер");
+            vybrosWarning("2021-04-20 17:45:00");
+            vybrosWarning("2021-04-20 17:50:00");
+            vybrosWarning("2021-04-20 17:55:00");
+            vybrosWarning("2021-04-20 17:59:00");
+            vybrosEvents("2021-04-20 18:00:00", "2021-04-20 18:25:00");
+
+            
             SaveState();
             if (myBlueToothAdapter == null)
                 InitBT();
@@ -1736,7 +1790,9 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                     || place==Places.Monolit
                     || place==Places.Sci
                     || place==Places.Shelter
-                    || place==Places.ClearSky) {playerCharcteristics.PsiHealing(); Log.d("Убежище",""+playerCharcteristics.getPsiHealth());}
+                    || place==Places.ClearSky
+                    ||place == Places.Village
+            ) {playerCharcteristics.PsiHealing(); Log.d("Убежище",""+playerCharcteristics.getPsiHealth());}
 
             if (playerCharcteristics.getGroup().isBasePlace(place)) {
                 int group=playerCharcteristics.getGroup().getID();
@@ -1826,7 +1882,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
 
                 if (playerCharcteristics.isRespirator()) {
-
+//playerCharcteristics.IncreaseRad_resist(10);
+//playerCharcteristics.IncreasePoison_resist(10);
                 }
 
                 //ПРОВЕРКА НА НАЛИЧИЕ НАРКОЗАВИСИМОСТИ
@@ -1921,6 +1978,9 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
                 String date = Initializator.GetCurrentDF();
                 switch (place) {
+
+                    case Gipnos:
+                        playerCharcteristics.setGipnos(true);
                     case Medic:
                         playerCharcteristics.IncreaseHealth(Initializator.ValueHealingOnBase());
                     break;
@@ -1931,11 +1991,11 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
                      case Monstroboi:
                         loc_vibration();
-                        Log.d("Жопонька","Монстробой сработал");
+                        Log.d("Монстробой","Монстробой сработал");
                       //  if (playerCharcteristics.getSuit().getId() == 27)
                         if (!playerCharcteristics.getHunter())
-                        {playerCharcteristics.isDead();
-                            Log.d("Жопонька","Монстр убит");}
+                        {playerCharcteristics.setDead(true);
+                            Log.d("Монстробой","Монстр убит");}
                         break;
 
                     case Controller:
@@ -1991,7 +2051,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     if (bolt_work<1)
                                     {damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
                                         playerCharcteristics.DamageSuit(damage);
-                                        anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()>0) anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()<=0) anomalyHealBigDamage();
                                     }}
                                 else
                                 {if (event_state>5)
@@ -2038,7 +2099,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     if (bolt_work<1)
                                     { damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
                                         playerCharcteristics.DamageSuit(damage);
-                                        anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()>0) anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()<=0) anomalyHealBigDamage();
                                     }}
                                 else
                                 {if (event_state>5)
@@ -2085,7 +2147,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     if (bolt_work<1)
                                     { damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
                                         playerCharcteristics.DamageSuit(damage);
-                                        anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()>0) anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()<=0) anomalyHealBigDamage();
                                     }}
                                 else
                                 {if (event_state>5)
@@ -2147,7 +2210,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                                     if (bolt_work<1)
                                     {damage = 3*anomaly_koefficient*(poweran*(1-resist/100));
                                         playerCharcteristics.DamageSuit(damage);
-                                        anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()>0) anomalyHealDamage();
+                                        if (playerCharcteristics.getSuitStamina()<=0) anomalyHealBigDamage();
                                     }}
                                 else
                                 {if (event_state>5)
@@ -2212,7 +2276,8 @@ public class ShiveluchService extends Service implements LocListenerInterface {
                         } else {
                             damage =((Math.abs((poweran * (100 - resist)) / kff))*13)/10;
                             playerCharcteristics.DamageSuit(damage * 4);
-                            anomalyHealDamage();
+                            if (playerCharcteristics.getSuitStamina()>0) anomalyHealDamage();
+                            if (playerCharcteristics.getSuitStamina()<=0) anomalyHealBigDamage();
                         }
                         break;
                     case Psi:
@@ -2316,9 +2381,10 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 //                                        poweran=10-poweran;
 //                                    }
 
-                            int rad_effect = (Math.abs((poweran *anomaly_koefficient* (100 - playerCharcteristics.GetRadResist())) / 10));
+                            int rad_effect = (Math.abs((poweran *anomaly_koefficient* (100 - playerCharcteristics.GetRadResist()))));
+                            boolean osob=playerCharcteristics.isOsob();
 
-                            playerCharcteristics.IncreaseRad(rad_effect);}
+                            if (!osob) playerCharcteristics.IncreaseRad(rad_effect);}
                         else
                         {if (event_state>5)
                         {String addict = Initializator.GetCurrentDF() + ".  " + "Аномалия: Радиация";
@@ -2348,6 +2414,12 @@ public class ShiveluchService extends Service implements LocListenerInterface {
 
     private void anomalyHealDamage() {
         float damagean = 35*damage;
+        playerCharcteristics.Damage(damagean);
+
+    }
+
+    private void anomalyHealBigDamage() {
+        float damagean = 140*damage;
         playerCharcteristics.Damage(damagean);
 
     }
@@ -2639,8 +2711,10 @@ public class ShiveluchService extends Service implements LocListenerInterface {
         ed.putInt("timer_osk", timer_osk);
         ed.putInt("MonPieceCouner", MonPieceCouner);
         ed.putInt("add_health", add_health);
+        ed.putBoolean("Gipnos",gipnos);
         ed.putBoolean("stalker_start", playerCharcteristics.getStalkerstart());
         ed.putBoolean("adept",playerCharcteristics.isAdept());
+        ed.putBoolean("osob",playerCharcteristics.isOsob());
 
 
         Date currentDate = new Date();
@@ -2698,7 +2772,7 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             playerCharcteristics.setProtivogas(servicePreferences.getBoolean("Protivogas", false));
             playerCharcteristics.setSZD(servicePreferences.getBoolean("SZD", false));
             playerCharcteristics.setTropa(servicePreferences.getBoolean("Tropa", false));
-            float rad = servicePreferences.getFloat("Rad", 150) - playerCharcteristics.getRad();
+            float rad = servicePreferences.getFloat("Rad", 1500) - playerCharcteristics.getRad();
             playerCharcteristics.IncreaseRad(rad);
             playerCharcteristics.setMedikits(servicePreferences.getInt("Medkits", 0));
             playerCharcteristics.setMilMedikits(servicePreferences.getInt("MilMedkits", 0));
@@ -2720,11 +2794,14 @@ public class ShiveluchService extends Service implements LocListenerInterface {
             if (servicePreferences.getBoolean("Battery", false))
                 playerCharcteristics.GiveBattery();
             playerCharcteristics.setAdept(servicePreferences.getBoolean("adept",false));
+            playerCharcteristics.setOsob(servicePreferences.getBoolean("osob",false));
+
 
             psi_helm_work = servicePreferences.getInt("psi_helm_work", 0);
             timer_osk = servicePreferences.getInt("timer_osk", 0);
             MonPieceCouner = servicePreferences.getInt("MonPieceCouner", 0);
             add_health = servicePreferences.getInt("add_health", 0);
+            gipnos=servicePreferences.getBoolean("gipnos",false);
 
             //проверка времени с последнего сохранения состояния
             String timeText = servicePreferences.getString("TimeStamp", "00:00:00");
@@ -2887,8 +2964,104 @@ public class ShiveluchService extends Service implements LocListenerInterface {
         }
     }
 
+public void vybrosWarning(String warning)
+{
+    Calendar currentDate = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String getCurrentDateTime = sdf.format(currentDate.getTime());
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    try {
+        Date dateCurrent  = format.parse(getCurrentDateTime);
+        Date dateStart = format.parse(warning);
+        if (dateStart.getTime()>dateCurrent.getTime()&&dateStart.getTime()<dateCurrent.getTime()+1005)
+        {
+            myAudioManager.PlaySound((PDA_AudioManager.AppSounds.VIBR));
+            Log.d ("VYBROS",""+dateStart+", "+dateCurrent.getTime());
+
+        }
 
 
+
+
+
+    } catch (ParseException e) {
+        e.printStackTrace();
+    }
+}
+
+    public void vybrosEvents(String startVybros, String endVybros) {
+        Calendar currentDate = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+       String getCurrentDateTime = sdf.format(currentDate.getTime());
+
+
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        boolean b;
+        try {
+            Date dateCurrent  = format.parse(getCurrentDateTime);
+            Date dateStart = new Date();
+            Date dateBegin= format.parse(startVybros);
+            Date dateEnd= format.parse(endVybros);
+            float heal=playerCharcteristics.getPsiHealth();
+            if (playerCharcteristics.isZombi()) zombiMode();
+            if (!playerCharcteristics.isZombi()) NotifyActivity("NOCONTROLER");
+            if (dateStart.getTime()>dateCurrent.getTime()&&dateStart.getTime()<dateCurrent.getTime()+1005)
+            {
+               // myAudioManager.PlaySound((PDA_AudioManager.AppSounds.VIBR));
+                Log.d ("VYBROS",""+dateStart+", "+dateCurrent.getTime());
+
+            }
+            if (dateBegin.getTime()>dateCurrent.getTime()&&dateBegin.getTime()<dateCurrent.getTime()+1005)
+            {
+                myAudioManager.PlaySound((PDA_AudioManager.AppSounds.BEFV));
+                Log.d ("VYBROS",""+dateBegin+", "+dateCurrent.getTime());
+
+            }
+
+            if (dateCurrent.getTime()>dateBegin.getTime()&&dateCurrent.getTime()<dateEnd.getTime())
+            {
+                Vibrator vibrator=(Vibrator)getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                Log.d("VYBROSproceed", "Идет выброс");
+                playerCharcteristics.setPsiHealth(playerCharcteristics.getPsiHealth()-1);
+                Log.d("VYBROSproceed", ""+playerCharcteristics.getPsiHealth());
+                heal=playerCharcteristics.getPsiHealth();
+                if (heal<60) vibrator.vibrate(100);
+                if (heal<20) vibrator.vibrate(500);
+                if (heal<60&&heal>20) NotifyActivity("FIRSTCONTROLER");
+                if (heal<20&&heal>0) NotifyActivity("SECONDCONTROLER");
+                if (heal>60) NotifyActivity("NOCONTROLER");
+                if (heal<=0) {playerCharcteristics.setZombi(true);vibrator.cancel();}
+
+
+
+            }
+
+            if (dateEnd.getTime()>dateCurrent.getTime()&&dateEnd.getTime()<dateCurrent.getTime()+1005)
+            {
+                myAudioManager.PlaySound((PDA_AudioManager.AppSounds.EOVIBR));
+                Log.d ("VYBROS",""+dateEnd+", "+dateCurrent.getTime());
+
+            }
+
+Log.d ("VYBROS",""+dateStart+", "+getCurrentDateTime+", ");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void zombiMode() {
+     {
+         zombiCount++;
+         playerCharcteristics.setDead(true);
+         if (zombiCount>600) {playerCharcteristics.setZombi(false); playerCharcteristics.PsiHealing();}
+         NotifyActivity("CONTROLER");
+
+
+     }
+
+    }
 
 
 }

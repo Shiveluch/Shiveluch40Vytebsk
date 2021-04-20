@@ -14,7 +14,6 @@ import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
@@ -23,7 +22,6 @@ import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MenuItem;
@@ -50,7 +48,6 @@ import android.Manifest;
 import android.os.Handler;
 
 import com.example.user.pdashiveluch.classes.DataPack;
-import com.example.user.pdashiveluch.classes.PlayerCharcteristics;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -121,7 +118,8 @@ public class pda extends AppCompatActivity {
     RelativeLayout layer2, artlayer, bottom_lay;
     ConstraintLayout cons_art;
     public static RelativeLayout artslot;
-    RelativeLayout deadlayout;
+    RelativeLayout deadlayout, RL6,RL67;
+
     EditText code_text;
     ImageView im13, l2_img, suit_img, saver;
     ListView l2_list, artslist_list, events;
@@ -456,6 +454,28 @@ public class pda extends AppCompatActivity {
 
     }
 
+    private void NotifyZombi04()
+    {
+        deadlayout.setVisibility(View.VISIBLE);
+        deadpic.setImageResource(R.drawable.zomb);
+        RelativeLayout.LayoutParams pic = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+        pic.addRule(RelativeLayout.CENTER_IN_PARENT);
+        deadpic.setLayoutParams(pic);
+        deadpic.setAlpha((float)0.4);
+
+    }
+
+    private void NotifyZombi07()
+    {
+        deadlayout.setVisibility(View.VISIBLE);
+        deadpic.setImageResource(R.drawable.zomb);
+        RelativeLayout.LayoutParams pic = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT);
+        pic.addRule(RelativeLayout.CENTER_IN_PARENT);
+        deadpic.setLayoutParams(pic);
+        deadpic.setAlpha((float)0.7);
+
+    }
+
     private void NotifyVybros()
     {
         deadlayout.setVisibility(View.VISIBLE);
@@ -555,9 +575,27 @@ public class pda extends AppCompatActivity {
             case Monolit:
                 anomaly.setText("Место: База \"МОНОЛИТ\"");
                 break;
+            case Gipnos:
+                anomaly.setText("Гипноз");
+                RL6.setVisibility(View.VISIBLE);
+                Log.d("GipnosSetByCase",""+dataPack.gipnos);
+
+                break;
+
             case None:
 
                 {anomaly.setText("Поиск...");
+
+                if (dataPack.gipnos) {
+                    Log.d("Gipnos",""+dataPack.gipnos);
+                    RL6.setVisibility(View.VISIBLE);
+            //        RL67.setVisibility(View.VISIBLE);
+                }
+                if (!dataPack.gipnos)
+                {Log.d("Gipnos",""+dataPack.gipnos);
+                    RL6.setVisibility(View.GONE);
+              //      RL67.setVisibility(View.GONE);
+                }
                 if (dataPack.PsiHealth<40)
                 {
                     effectlogo.setVisibility(View.VISIBLE);
@@ -680,10 +718,10 @@ public class pda extends AppCompatActivity {
     }
 
     private void NotifyParameters() {
-        radbar_new.setText("Накоплено радиации: " + dataPack.rad); //ОТОБРАЖЕНИЕ УРОВНЯ РАДИАЦИИ В ТЕКСТОВОМ ВИДЕ
+        radbar_new.setText("Накоплено радиации: " + (dataPack.rad/10)); //ОТОБРАЖЕНИЕ УРОВНЯ РАДИАЦИИ В ТЕКСТОВОМ ВИДЕ
         suittext_new.setText("Прочность костюма: " + Math.round(dataPack.suit_stam_big/10));//ОТОБРАЖЕНИЕ УРОВНЯ КОСТЮМА В ТЕКСТОВОМ ВИДЕ
         healtext_new.setText("Здоровье:" + Math.round(dataPack.heal_big/1000));//ОТОБРАЖЕНИЕ УРОВНЯ ЗДОРОВЬЯ В ТЕКТОВОМ ВИДЕ
-        pb_rad.setProgress(dataPack.rad); //УСТАНОВКА НАПОЛНЕНИЯ ШКАЛЫ РАДИАЦИИ
+        pb_rad.setProgress(dataPack.rad/10); //УСТАНОВКА НАПОЛНЕНИЯ ШКАЛЫ РАДИАЦИИ
         pbHorizontal.setProgress(Math.round(dataPack.heal_big/1000));//УСТАНОВКА НАПОЛНЕНИЯ ШКАЛЫ ЗДОРОВЬЯ
         pb_suit.setProgress(Math.round(dataPack.suit_stam_big/10)); //УСТАНОВКА НАПОЛНЕНИЯ ШКАЛЫ ПРОЧНОСТИ КОСТЮМА
         NotifyRank();
@@ -734,6 +772,11 @@ public class pda extends AppCompatActivity {
 
     }
 
+    private void NotifyOsob()
+    {
+
+    }
+
     private void NotifyPower()
     {
        power=dataPack.power;
@@ -741,6 +784,13 @@ public class pda extends AppCompatActivity {
        distance=dataPack.distance;
        Log.d("power", "Power: "+power);
         Log.d("power", "loctime: "+loctime);
+    }
+
+    private void NotifyGipnos()
+    {
+
+        if (dataPack.gipnos) RL6.setVisibility(View.VISIBLE);
+        if (!dataPack.gipnos) RL6.setVisibility(View.GONE);
     }
 
     private void NotifyLoctime()
@@ -844,7 +894,26 @@ private void NotifyGPS()
                 NotifyPower();
                 NotifyLoctime();
                 NotifyPlaceChange();
+                NotifyGipnos();
                 Log.d("pla",""+power);
+                break;
+            case "GIPNOS":
+                NotifyGipnos();
+                break;
+            case "CONTROLER":
+                NotifyZombi();
+            break;
+
+            case "FIRSTCONTROLER":
+                NotifyZombi04();
+                break;
+
+            case "SECONDCONTROLER":
+                NotifyZombi07();
+                break;
+
+            case "NOCONTROLER":
+                NotifyNoZombi();
                 break;
 
             case "VYBROS":
@@ -895,6 +964,9 @@ private void NotifyGPS()
                     break;
             case "ADEPT":
                 NotifyAdept();
+                break;
+            case "OSOB":
+                NotifyOsob();
                 break;
             case "POWER":
                 NotifyPower();
@@ -1207,6 +1279,8 @@ private void NotifyGPS()
 
 
         anomaly = findViewById(R.id.anomaly_id);
+        RL6=findViewById(R.id.RL6);
+       // RL67=findViewById(R.id.RL6);
 
         //dlgdead = new dead_dialog();
         //dlgdead.show(getFragmentManager(), "dlgdead");
@@ -2030,6 +2104,21 @@ public void BackPack()
             SendActionBroadcast("GiveHunter");
 
         }
+
+        if (codename.equals(allcodes[76])) {
+            SendActionBroadcast("DrinkVodka");
+        }
+
+        if (codename.equals(allcodes[77])) {
+            SendActionBroadcast("RemoveGipnos");
+
+        }
+
+        if (codename.equals(allcodes[78])) {
+            SendActionBroadcast("Osob");
+
+        }
+
 
 
 

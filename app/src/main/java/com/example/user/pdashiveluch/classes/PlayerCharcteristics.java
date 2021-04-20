@@ -39,6 +39,7 @@ public final class PlayerCharcteristics {
     public boolean otrava; //флаг наличия/отсутствия отравления
     public boolean tropa; //флаг наличия/отсутствия Тропы ЧН
     public boolean adept;//флаг адептства
+    public boolean osob;
     public boolean hunter;
     public boolean immun;
     public boolean skin;
@@ -72,6 +73,7 @@ public final class PlayerCharcteristics {
 
     //private pda activity; //обратная связь
     private ShiveluchService service;
+    private boolean gipnos;
 
     public PlayerCharcteristics(ShiveluchService value){
         service=value;
@@ -102,7 +104,7 @@ public final class PlayerCharcteristics {
         PsiHealth=100;
         monvoice = false;
 
-        rad = 150;
+        rad = 1500;
         power=0;
         loctime=3;
 
@@ -136,8 +138,8 @@ public final class PlayerCharcteristics {
     public void GiveKolobok(){
         Artifact art=new Artifact("Батарейка", "",
                 R.drawable.shar,-5,0,0,
-                -5,0,20,0,0);
-        art.set_description("Термозащита -5. Химзащита -5. Электрозащита +20\n");
+                -5,0,20,10,1);
+        art.set_description("Огонь -5. 0.1 рад/сек. +0.1 зд./сек Эл-во +20\n");
         Kolobok.set_artifact(art);
         service.NotifyToast("Получен артефакт: "+art.get_name());
         service.NotifyActivity("ART");
@@ -145,9 +147,9 @@ public final class PlayerCharcteristics {
 
     public void GivePlenka(){
         Artifact art=new Artifact("Кристалл", "",
-                R.drawable.rybka,20,0,-5,0,
-                0,0,0,0);
-        art.set_description("Рад. защита -5. Термозащита +15\n");
+                R.drawable.rybka,20,0,0,5,
+                0,5,0,1);
+        art.set_description("Огонь +20. Химия +5 Эл-во +5 0.1 рад/сек\n");
         Plenka.set_artifact(art);
         service.NotifyToast("Получен артефакт: "+art.get_name());
         service.NotifyActivity("ART");
@@ -155,9 +157,9 @@ public final class PlayerCharcteristics {
 
     public void GivePuzir(){
         Artifact art=new Artifact("Пустышка", "",
-                R.drawable.dusha,0,-5,0,15,
-                0,0,0,1);
-        art.set_description("Грав. защита -5. Химзащита +15. +1 рад/сек  \n");
+                R.drawable.dusha,0,5,0,15,
+                0,0,0,-2);
+        art.set_description("Грав. +5. Химия +15. -0.2 рад/сек  \n");
         Puzir.set_artifact(art);
         service.NotifyToast("Получен артефакт: "+art.get_name());
         service.NotifyActivity("ART");
@@ -166,9 +168,9 @@ public final class PlayerCharcteristics {
 
     public void GiveHeart(){
         Artifact art=new Artifact("Золотая рыбка", "",
-                R.drawable.meduza,0,15,0,0,
-                0,0,11,-1);
-        art.set_description("Грав. защита +15. Здоровье +0,66/мин. Рад. -1/сек  \n");
+                R.drawable.meduza,0,0,10,5,
+                0,5,20,4);
+        art.set_description("Рад. +10. Химия +5 Эл-во +5 Здоровье +0.2/сек. 0.4 рад/сек  \n");
         Heart.set_artifact(art);
         service.NotifyToast("Получен артефакт: "+art.get_name());
         service.NotifyActivity("ART");
@@ -176,9 +178,9 @@ public final class PlayerCharcteristics {
 
     public void GiveBattery(){
         Artifact art=new Artifact("Каменный цветок", "",R.drawable.batareika,
-                0,0,10,0,5,
-                0,-7,0);
-        art.set_description("Рад. защита +10. Пси-защита +5. Здоровье -0.42/мин\n");
+                0,0,10,0,10,
+                0,20,0);
+        art.set_description("Рад. +10. Пси +10.  0.2 зд/сек\n");
         Battery.set_artifact(art);
         service.NotifyToast("Получен артефакт: "+art.get_name());
         service.NotifyActivity("ART");
@@ -514,7 +516,7 @@ public final class PlayerCharcteristics {
             return;
         this.zombi = zombi;
         Vibrator vibrator = (Vibrator) service.getSystemService(Context.VIBRATOR_SERVICE);
-            ZombiMode();
+           // ZombiMode();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             vibrator.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
         } else {
@@ -583,6 +585,14 @@ public final class PlayerCharcteristics {
 
     }
 
+    public void setOsob(boolean osob) {
+        if(this.osob==osob)
+            return;
+        this.osob = osob;
+        service.NotifyActivity("OSOB");
+
+    }
+
     public void setHunter(boolean hunter) {
         if(this.hunter==hunter)
             return;
@@ -594,6 +604,13 @@ public final class PlayerCharcteristics {
     public boolean isAdept() {
         return adept;
     }
+
+    public boolean isOsob() {
+        return osob;
+    }
+
+
+
 
     public void setRespirator(boolean respirator) {
         if(this.respirator==respirator)
@@ -725,7 +742,7 @@ public final class PlayerCharcteristics {
         return Math.round(PsiHealth);
     }
 
-    private void setPsiHealth(float value){
+    public void setPsiHealth(float value){
         PsiHealth=value;
         if(getPsiHealth()<0)
             PsiHealth=0;
@@ -834,11 +851,11 @@ public final class PlayerCharcteristics {
         return Math.round(rad);
     }
 
-    private void setRad(float rad) {
+    public void setRad(float rad) {
         this.rad = rad;
         //РАДИАЦИЯ НЕ МОЖЕТ БЫТЬ МЕНЬШЕ 150
-        if (this.rad <= 150) {
-            this.rad = 150;
+        if (this.rad <= 1500) {
+            this.rad = 1500;
 
         }
     }
@@ -1027,6 +1044,8 @@ public final class PlayerCharcteristics {
                 service.myAudioManager.PlaySound(PDA_AudioManager.AppSounds.ZOMBIE);
             else
                 service.myAudioManager.PlaySound(PDA_AudioManager.AppSounds.DEATH);
+            int currentSuit=getSuit().getId();
+            if (currentSuit<27) GiveSuitKurt();
 
 
 
@@ -1038,7 +1057,7 @@ public final class PlayerCharcteristics {
                 vibrator.vibrate(pattern,0);
             }
         } else {
-            rad = 150;
+            rad = 1500;
             suit.ResetStamina();
             vibrator.cancel();
             long[] pattern = {0, 500, 500,250,500,155,500, 500, 500,250,500,155,500, 500, 500,250,500,155,500};
@@ -1226,8 +1245,8 @@ public final class PlayerCharcteristics {
         mil_medikits--;
         heal_big = heal_big + 25000;
         if (heal_big > 100000) heal_big = 99900;
-        rad = rad - 1000;
-        if (rad < 150) rad = 150;
+        rad = rad - 10000;
+        if (rad < 1500) rad = 1500;
         service.NotifyActivity("MIL_MEDKIT");
         service.NotifyToast("Добавлено 25 здоровья, уровень набранной радиации снижен");
         return true;
@@ -1240,7 +1259,7 @@ public final class PlayerCharcteristics {
         if(repairs==0)
             return;
         repairs--;
-        int s_repair = 1000;
+        int s_repair = 250;
         suit.Repair(s_repair);
         String addict = Initializator.GetCurrentDF() + ".  " + "Отремонтирован костюм. Прочность: " + getIntegerSuitStamina()/10;
         service.NotifyLog(addict);
@@ -1254,8 +1273,8 @@ public final class PlayerCharcteristics {
         sci_medikits--;
         heal_big = heal_big + 50000;
         if (heal_big > 100000) heal_big = 99900;
-        rad = rad - 1500;
-        if (rad < 150) rad = 150;
+        rad = rad - 15000;
+        if (rad < 1500) rad = 1500;
         service.NotifyActivity("SCI_MEDKIT");
         service.NotifyToast("Добавлено 50 здоровья, уровень набранной радиации снижен");
         return true;
@@ -1265,8 +1284,8 @@ public final class PlayerCharcteristics {
         if(antirads==0)
             return false;
         antirads--;
-        rad = rad - 1000;
-        if (rad < 150) rad = 150;
+        rad = rad - 10000;
+        if (rad < 1500) rad = 1500;
         service.NotifyActivity("ANTIRAD");
         service.NotifyToast("Выведено 1000 радиации");
         return true;
@@ -1426,35 +1445,69 @@ public final class PlayerCharcteristics {
 
         }}
 
-    public void GiveSuitKurt() { SetSuit(new Suit(service,1,"Кожаная куртка","Нет описания",1000,5,5,10,0,5,10));    }
-    public void GiveSuitZaria(){ suit=new Suit(service,2,"Заря","Нет описания",1000,25,25,20,0,35,20);}
-    public void GiveSuitSeva(){ suit=new Suit(service,3,"Сева","Нет описания",1000,40,40,35,0,50,35);}
-    public void GiveSuitExo(){ suit=new Suit(service,4,"Экзоскелет","Нет описания",1000,60,60,55,5,60,55);}
-    public void GiveSuitBand(){ suit=new Suit(service,5,"Бандитская куртка","Нет описания",1000,10,10,10,0,0,10);}
-    public void GiveSuitPlas(){ suit=new Suit(service,6,"Кожаный плащ","Нет описания",1000,15,10,10,0,5,10);}
-    public void GiveSuitBron(){ suit=new Suit(service,7,"Армейский бронежилет","Нет описания",1000,15,15,15,0,15,15);}
-    public void GiveSuitBulat(){ suit=new Suit(service,8,"Булат","Нет описания",1000,35,20,25,0,20,25);}
-    public void GiveSuitBerill(){ suit=new Suit(service,9,"Берилл","Нет описания",1000,50,35,40,0,35,40);}
-    public void GiveSuitDolgKombez(){ suit=new Suit(service,10,"Комбинезон Долга (ПС3-9д)","Нет описания",1000,25,25,25,0,25,25);}
-    public void GiveSuitDolgBron(){ suit=new Suit(service,11,"Броня Долга (ПС3-9Мд)","Нет описания",1000,40,40,40,0,40,40);}
-    public void GiveSuitDolgExa(){ suit=new Suit(service,12,"Экзоскелет Долга","Нет описания",1000,60,60,55,10,55,60);}
-    public void GiveSuitStrazh(){ suit=new Suit(service,13,"Страж Свободы","Нет описания",1000,20,20,35,0,30,20);}
-    public void GiveSuitVeter(){ suit=new Suit(service,14,"Ветер Свободы","Нет описания",1000,35,35,50,0,45,35);}
-    public void GiveSuitFreeExa(){ suit=new Suit(service,15,"Экзоскелет Свободы","Нет описания",1000,55,50,65,10,65,55);}
-    public void GiveSuitMonKombez(){ suit=new Suit(service,16,"Комбинезон Монолита","Нет описания",1000,30,30,30,100,30,30);}
-    public void GiveSuitMonBron(){ suit=new Suit(service,17,"Броня Монолита","Нет описания",1000,45,45,45,100,45,45);}
-    public void GiveSuitMonExa(){ suit=new Suit(service,18,"Экзоскелет Монолита","Нет описания",1000,60,60,60,100,60,60);}
-    public void GiveSuitNaemKombez(){ suit=new Suit(service,19,"Комбинезон Наёмников","Нет описания",1000,25,35,20,0,20,25);}
-    public void GiveSuitNaemBron(){ suit=new Suit(service,20,"Броня Наёмников","Нет описания",1000,40,50,35,0,35,40);}
-    public void GiveSuitCS1(){ suit=new Suit(service,21,"Комбинезон ЧН-1","Нет описания",1000,15,20,25,0,25,15);}
-    public void GiveSuitCS2(){ suit=new Suit(service,22,"Броня ЧН-2","Нет описания",1000,28,33,38,0,38,28);}
-    public void GiveSuitCS3(){ suit=new Suit(service,23,"Бронекостюм ЧН-3а","Нет описания",1000,45,50,55,5,60,45);}
-    public void GiveSuitHalat(){ suit=new Suit(service,24,"Халат Ученых","Нет описания",1000,5,5,5,0,5,5);}
-    public void GiveSuitEcolog(){ suit=new Suit(service,25,"Эколог (ССП-99)","Нет описания",1000,28,28,38,5,38,28);}
-    public void GiveSuitEcolog2(){ suit=new Suit(service,26,"ССП-99М","Нет описания",1000,45,45,55,5,55,45);}
-    public void GiveSuitMonster(){ suit=new Suit(service,27,"Костюм «Монстр»","Нет описания",1000,90,90,90,90,90,90);}
-    public void GiveSuitIgrotex(){ suit=new Suit(service,28,"Костюм «Игротех»","Нет описания",1000,100,100,100,100,100,100);}
-    public void GiveSuitBolot(){ suit=new Suit(service,29,"Костюм «Болотный Доктор»","Нет описания",1000,75,75,75,75,75,75);}
+
+    public void GiveSuitKurt() { suit=new Suit(service,1,"Кожаная куртка","",1000,5,5,10,0,5,10);}
+    public void GiveSuitZaria(){ suit=new Suit(service,2,"Заря","",1000,30,25,25,15,30,25);}
+    public void GiveSuitSeva(){ suit=new Suit(service,3,"Сева","",1000,55,50,55,30,55,50);}
+    public void GiveSuitExo(){ suit=new Suit(service,4,"Экзоскелет","",1000,60,60,50,30,60,55);}
+    public void GiveSuitBand(){ suit=new Suit(service,5,"Бандитская куртка","",1000,10,10,10,0,0,10);}
+    public void GiveSuitPlas(){ suit=new Suit(service,6,"Кожаный плащ","",1000,15,10,10,0,5,10);}
+    public void GiveSuitBron(){ suit=new Suit(service,7,"Армейский бронежилет","",1000,15,15,15,5,15,15);}
+    public void GiveSuitBulat(){ suit=new Suit(service,8,"Булат","",1000,35,20,25,8,20,25);}
+    public void GiveSuitBerill(){ suit=new Suit(service,9,"Берилл","",1000,50,35,40,15,35,40);}
+    public void GiveSuitDolgKombez(){ suit=new Suit(service,10,"Комбинезон Долга (ПС3-9д)","",1000,25,25,25,10,25,25);}
+    public void GiveSuitDolgBron(){ suit=new Suit(service,11,"Броня Долга (ПС3-9Мд)","",1000,40,40,40,20,40,40);}
+    public void GiveSuitDolgExa(){ suit=new Suit(service,12,"Экза Долга","",1000,60,60,55,30,55,60);}
+    public void GiveSuitStrazh(){ suit=new Suit(service,13,"Ветер Свободы","",1000,20,20,35,10,30,20);}
+    public void GiveSuitVeter(){ suit=new Suit(service,14,"Страж Свободы","",1000,35,35,50,20,45,35);}
+    public void GiveSuitFreeExa(){ suit=new Suit(service,15,"Экза Свободы","",1000,55,50,65,30,65,55);}
+    public void GiveSuitMonKombez(){ suit=new Suit(service,16,"Комбинезон Монолита","",1000,30,30,30,100,30,30);}
+    public void GiveSuitMonBron(){ suit=new Suit(service,17,"Броня Монолита","",1000,45,45,45,100,45,45);}
+    public void GiveSuitMonExa(){ suit=new Suit(service,18,"Экза Монолита","",1000,60,60,60,100,60,60);}
+    public void GiveSuitNaemKombez(){ suit=new Suit(service,19,"Комбинезон Наёмников","",1000,25,35,20,10,20,25);}
+    public void GiveSuitNaemBron(){ suit=new Suit(service,20,"Броня Наёмников","",1000,40,50,35,20,35,40);}
+    public void GiveSuitCS1(){ suit=new Suit(service,21,"Комбинезон ЧН-1","",1000,15,20,25,10,25,15);}
+    public void GiveSuitCS2(){ suit=new Suit(service,22,"Броня ЧН-2","",1000,28,33,38,20,38,28);}
+    public void GiveSuitCS3(){ suit=new Suit(service,23,"Бронекостюм ЧН-3а","",1000,45,50,55,30,60,45);}
+    public void GiveSuitHalat(){ suit=new Suit(service,24,"Халат Ученых","",1000,5,5,5,0,5,5);}
+    public void GiveSuitEcolog(){ suit=new Suit(service,25,"Эколог (ССП-99)","",1000,28,28,38,20,38,28);}
+    public void GiveSuitEcolog2(){ suit=new Suit(service,26,"ССП-99М","",1000,45,45,55,30,55,45);}
+    public void GiveSuitMonster(){ suit=new Suit(service,27,"Костюм «Монстр»","",1000,90,90,90,100,90,90);}
+    public void GiveSuitIgrotex(){ suit=new Suit(service,28,"Костюм «Игротех»","",1000,100,100,100,100,100,100);}
+    public void GiveSuitBolot(){ suit=new Suit(service,29,"Костюм «Болотный Доктор»","",1000,75,75,75,75,75,75);}
+
+
+
+
+//    public void GiveSuitKurt() { SetSuit(new Suit(service,1,"Кожаная куртка","Нет описания",1000,5,5,10,0,5,10));    }
+//    public void GiveSuitZaria(){ suit=new Suit(service,2,"Заря","Нет описания",1000,25,25,20,0,35,20);}
+//    public void GiveSuitSeva(){ suit=new Suit(service,3,"Сева","Нет описания",1000,40,40,35,0,50,35);}
+//    public void GiveSuitExo(){ suit=new Suit(service,4,"Экзоскелет","Нет описания",1000,60,60,55,5,60,55);}
+//    public void GiveSuitBand(){ suit=new Suit(service,5,"Бандитская куртка","Нет описания",1000,10,10,10,0,0,10);}
+//    public void GiveSuitPlas(){ suit=new Suit(service,6,"Кожаный плащ","Нет описания",1000,15,10,10,0,5,10);}
+//    public void GiveSuitBron(){ suit=new Suit(service,7,"Армейский бронежилет","Нет описания",1000,15,15,15,0,15,15);}
+//    public void GiveSuitBulat(){ suit=new Suit(service,8,"Булат","Нет описания",1000,35,20,25,0,20,25);}
+//    public void GiveSuitBerill(){ suit=new Suit(service,9,"Берилл","Нет описания",1000,50,35,40,0,35,40);}
+//    public void GiveSuitDolgKombez(){ suit=new Suit(service,10,"Комбинезон Долга (ПС3-9д)","Нет описания",1000,25,25,25,0,25,25);}
+//    public void GiveSuitDolgBron(){ suit=new Suit(service,11,"Броня Долга (ПС3-9Мд)","Нет описания",1000,40,40,40,0,40,40);}
+//    public void GiveSuitDolgExa(){ suit=new Suit(service,12,"Экзоскелет Долга","Нет описания",1000,60,60,55,10,55,60);}
+//    public void GiveSuitStrazh(){ suit=new Suit(service,13,"Страж Свободы","Нет описания",1000,20,20,35,0,30,20);}
+//    public void GiveSuitVeter(){ suit=new Suit(service,14,"Ветер Свободы","Нет описания",1000,35,35,50,0,45,35);}
+//    public void GiveSuitFreeExa(){ suit=new Suit(service,15,"Экзоскелет Свободы","Нет описания",1000,55,50,65,10,65,55);}
+//    public void GiveSuitMonKombez(){ suit=new Suit(service,16,"Комбинезон Монолита","Нет описания",1000,30,30,30,100,30,30);}
+//    public void GiveSuitMonBron(){ suit=new Suit(service,17,"Броня Монолита","Нет описания",1000,45,45,45,100,45,45);}
+//    public void GiveSuitMonExa(){ suit=new Suit(service,18,"Экзоскелет Монолита","Нет описания",1000,60,60,60,100,60,60);}
+//    public void GiveSuitNaemKombez(){ suit=new Suit(service,19,"Комбинезон Наёмников","Нет описания",1000,25,35,20,0,20,25);}
+//    public void GiveSuitNaemBron(){ suit=new Suit(service,20,"Броня Наёмников","Нет описания",1000,40,50,35,0,35,40);}
+//    public void GiveSuitCS1(){ suit=new Suit(service,21,"Комбинезон ЧН-1","Нет описания",1000,15,20,25,0,25,15);}
+//    public void GiveSuitCS2(){ suit=new Suit(service,22,"Броня ЧН-2","Нет описания",1000,28,33,38,0,38,28);}
+//    public void GiveSuitCS3(){ suit=new Suit(service,23,"Бронекостюм ЧН-3а","Нет описания",1000,45,50,55,5,60,45);}
+//    public void GiveSuitHalat(){ suit=new Suit(service,24,"Халат Ученых","Нет описания",1000,5,5,5,0,5,5);}
+//    public void GiveSuitEcolog(){ suit=new Suit(service,25,"Эколог (ССП-99)","Нет описания",1000,28,28,38,5,38,28);}
+//    public void GiveSuitEcolog2(){ suit=new Suit(service,26,"ССП-99М","Нет описания",1000,45,45,55,5,55,45);}
+//    public void GiveSuitMonster(){ suit=new Suit(service,27,"Костюм «Монстр»","Нет описания",1000,90,90,90,90,90,90);}
+//    public void GiveSuitIgrotex(){ suit=new Suit(service,28,"Костюм «Игротех»","Нет описания",1000,100,100,100,100,100,100);}
+//    public void GiveSuitBolot(){ suit=new Suit(service,29,"Костюм «Болотный Доктор»","Нет описания",1000,75,75,75,75,75,75);}
 
 
 
@@ -1551,14 +1604,14 @@ public final class PlayerCharcteristics {
 
     public void DamageSuit(float value){
 
-        float oldStamina=suit.getSuit_stam_big();
+       // float oldStamina=suit.getSuit_stam_big();
         suit.DecreaseStamina(value);
-        if(oldStamina!=suit.getSuit_stam_big()&&suit.getSuit_stam_big()==0){
-            Damage(heal_big);
-            String addict = Initializator.GetCurrentDF() + ".  " + "Смерть в гравитационной аномалии - поломка костюма";
-            service.NotifyLog(addict);
+//        if(oldStamina!=suit.getSuit_stam_big()&&suit.getSuit_stam_big()==0){
+//            Damage(heal_big);
+//            String addict = Initializator.GetCurrentDF() + ".  " + "Смерть в гравитационной аномалии - поломка костюма";
+//            service.NotifyLog(addict);
 
-        }
+     //   }
     }
 
     public void setLatitude(double value){
@@ -1612,6 +1665,15 @@ public final class PlayerCharcteristics {
         return hunter;
     }
 
+    public void setGipnos(boolean gipnos) {
+        if(this.gipnos==gipnos)
+            return;
+        this.gipnos = gipnos;
+    }
+
+    public boolean getGipnos() {
+        return gipnos;
+    }
 
 
     //endregion

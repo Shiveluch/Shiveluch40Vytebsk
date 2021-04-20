@@ -7,6 +7,286 @@
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@id/L3"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="7"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/medikit_new"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                app:srcCompat="@drawable/medikit" />
+
+                            <TextView
+                                android:id="@+id/medikit_amount"
+                                style="@style/invtext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal|center_vertical"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginTop="0dp"
+                                android:fontFamily="@font/graffiti"
+                                android:gravity="center_horizontal"
+                                android:text="x10"
+                                android:textColor="@android:color/holo_orange_light"
+                                android:textSize="7pt" />
+
+                            <ImageView
+                                android:id="@+id/remont"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="20dp"
+                                app:srcCompat="@drawable/remont" />
+
+                            <TextView
+                                android:id="@+id/rem_amount"
+                                style="@style/invtext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/graffiti"
+                                android:text="x10"
+                                android:textColor="@android:color/holo_orange_light" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/sci_med"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                app:srcCompat="@drawable/sci_medikit" />
+
+                            <TextView
+                                android:id="@+id/sci_med_amount"
+                                style="@style/invtext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/graffiti"
+                                android:text="x10"
+                                android:textColor="@android:color/holo_orange_light"
+                                android:textSize="7pt"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/bolt"
+                                android:layout_width="50dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="20dp"
+                                app:srcCompat="@drawable/bolt" />
+
+                            <TextView
+                                android:id="@+id/bolt_amount"
+                                style="@style/invtext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/graffiti"
+                                android:text="x10"
+                                android:textColor="@android:color/holo_orange_light"
+                                android:textSize="7pt"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/mil_med"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                app:srcCompat="@drawable/mil_medikit" />
+
+                            <TextView
+                                android:id="@+id/mil_med_amount"
+                                style="@style/invtext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/graffiti"
+                                android:text="x10"
+                                android:textColor="@android:color/holo_orange_light"
+                                android:textSize="7pt"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/antirad_new"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginLeft="20dp"
+                                app:srcCompat="@drawable/antirad" />
+
+                            <TextView
+                                android:id="@+id/antirad_amount"
+                                style="@style/invtext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/graffiti"
+                                android:text="x10"
+                                android:textColor="@android:color/holo_orange_light"
+                                android:textSize="7pt" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/graffiti"
+                    android:text="Артефакты:"
+                    android:textColor="@android:color/holo_orange_light"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/slot1txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="11dp"
+                    android:fontFamily="@font/graffiti"
+                    android:text="СЛОТ 1: Пусто"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/slot2txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/graffiti"
+                    android:text="СЛОТ 2: Пусто"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/slot3txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/graffiti"
+                    android:text="СЛОТ 3: Пусто"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/slot4txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/graffiti"
+                    android:text="СЛОТ 4: Пусто"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/slot5txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/graffiti"
+                    android:text="СЛОТ 5: Пусто"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/artseffects"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/fixedsys"
+                    android:text="Эффекты:"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/closeinv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/graffiti"
+            android:paddingBottom="30dp"
+            android:text="Закрыть"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -398,286 +678,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/relativeLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@id/L3"
-        android:visibility="visible">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="7"
-                        android:orientation="vertical">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/medikit_new"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                app:srcCompat="@drawable/medikit" />
-
-                            <TextView
-                                android:id="@+id/medikit_amount"
-                                style="@style/invtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal|center_vertical"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginTop="0dp"
-                                android:fontFamily="@font/graffiti"
-                                android:gravity="center_horizontal"
-                                android:text="x10"
-                                android:textColor="@android:color/holo_orange_light"
-                                android:textSize="7pt" />
-
-                            <ImageView
-                                android:id="@+id/remont"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginLeft="20dp"
-                                app:srcCompat="@drawable/remont" />
-
-                            <TextView
-                                android:id="@+id/rem_amount"
-                                style="@style/invtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/graffiti"
-                                android:text="x10"
-                                android:textColor="@android:color/holo_orange_light" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/sci_med"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                app:srcCompat="@drawable/sci_medikit" />
-
-                            <TextView
-                                android:id="@+id/sci_med_amount"
-                                style="@style/invtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/graffiti"
-                                android:text="x10"
-                                android:textColor="@android:color/holo_orange_light"
-                                android:textSize="7pt"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:id="@+id/bolt"
-                                android:layout_width="50dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="20dp"
-                                app:srcCompat="@drawable/bolt" />
-
-                            <TextView
-                                android:id="@+id/bolt_amount"
-                                style="@style/invtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/graffiti"
-                                android:text="x10"
-                                android:textColor="@android:color/holo_orange_light"
-                                android:textSize="7pt"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/mil_med"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                app:srcCompat="@drawable/mil_medikit" />
-
-                            <TextView
-                                android:id="@+id/mil_med_amount"
-                                style="@style/invtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/graffiti"
-                                android:text="x10"
-                                android:textColor="@android:color/holo_orange_light"
-                                android:textSize="7pt"
-                                android:textStyle="bold" />
-
-                            <ImageView
-                                android:id="@+id/antirad_new"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:layout_marginLeft="20dp"
-                                app:srcCompat="@drawable/antirad" />
-
-                            <TextView
-                                android:id="@+id/antirad_amount"
-                                style="@style/invtext"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/graffiti"
-                                android:text="x10"
-                                android:textColor="@android:color/holo_orange_light"
-                                android:textSize="7pt" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView34"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="Артефакты:"
-                    android:textColor="@android:color/holo_orange_light"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/slot1txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="11dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 1: Пусто"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/slot2txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 2: Пусто"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/slot3txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 3: Пусто"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/slot4txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 4: Пусто"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/slot5txt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="12dp"
-                    android:fontFamily="@font/graffiti"
-                    android:text="СЛОТ 5: Пусто"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/artseffects"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/fixedsys"
-                    android:text="Эффекты:"
-                    android:textColor="@android:color/holo_orange_dark"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/closeinv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="0dp"
-            android:fontFamily="@font/graffiti"
-            android:paddingBottom="30dp"
-            android:text="Закрыть"
-            android:textSize="18sp"
-            android:visibility="gone" />
-
-
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/deadlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -689,6 +689,16 @@
             android:layout_height="match_parent"
 
             android:src="@drawable/dead"></ImageView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/RL6"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        android:background="@drawable/gipnosland"
+        android:visibility="gone">
 
     </RelativeLayout>
 
